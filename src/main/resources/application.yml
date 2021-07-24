@@ -1,0 +1,31 @@
+mvn.project.version: ${project.version}
+
+server:
+  port: 8050
+  compression:
+    enabled: true
+    min-response-size: 1KB
+  http2:
+    enabled: true
+
+spring:
+  flyway:
+    ignore-missing-migrations: true
+    outOfOrder: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  #Данные подключения к БД
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/wordgame
+    type: com.zaxxer.hikari.HikariDataSource
+    username: postgres
+    password: postgres
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 100
+
+spring.main.allow-bean-definition-overriding: true
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
+management.metrics.binders.hystrix.enabled: false
