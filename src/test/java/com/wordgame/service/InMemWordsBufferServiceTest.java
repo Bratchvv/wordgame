@@ -6,10 +6,12 @@ import com.wordgame.generator.service.GeneratorService;
 import com.wordgame.generator.service.InMemWordsBufferService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.mockito.Mockito.mock;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
+@ActiveProfiles("test")
 public class InMemWordsBufferServiceTest {
 
     @Test
@@ -25,8 +27,5 @@ public class InMemWordsBufferServiceTest {
 
         assertEquals("Размер очереди буфера не совпадает с ожидаемым",
                 5,   serviceSpy.getClq().size());
-
-        serviceSpy.getFromBuffer();
-        Mockito.verify(serviceSpy, Mockito.times(6)).addToBuffer();
     }
 }

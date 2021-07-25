@@ -3,12 +3,15 @@ package com.wordgame.generator.algorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
+
 import java.util.List;
 
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 
 @Slf4j
+@ActiveProfiles("test")
 public class ReadFileWordTest {
 
     private List<String> words;

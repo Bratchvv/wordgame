@@ -4,6 +4,7 @@ import com.wordgame.generator.algorithm.ReadWordsUtil;
 import com.wordgame.generator.service.InMemDictionaryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
+@ActiveProfiles("test")
 public class InMemDictionaryServiceTest {
 
     private List<String> words;

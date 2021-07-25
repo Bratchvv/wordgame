@@ -14,7 +14,7 @@ public class BonusAlgorithm {
     static Map<Vector2Int, BonusVariant> generateBonusPosition(int countRow, int countColumn) {
         var dict = new HashMap<Vector2Int, BonusVariant>();
         // создаем лист из бонусов
-        var bonusArray = Lists.newArrayList(BonusVariant.C_2, BonusVariant.C_3, BonusVariant.X_2, BonusVariant.X_3);
+        var bonusArray = Lists.newArrayList(BonusVariant.c2, BonusVariant.c3, BonusVariant.x2, BonusVariant.x3);
 
         // заполняем словарь
         while (dict.size() < 4) {

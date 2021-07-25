@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.test.context.ActiveProfiles;
 
 import static com.wordgame.generator.model.BonusVariant.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -15,6 +16,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 
 @Slf4j
+@ActiveProfiles("test")
 public class GeneratorAdapterTest {
 
     private ReadFileWord readFileWord;
