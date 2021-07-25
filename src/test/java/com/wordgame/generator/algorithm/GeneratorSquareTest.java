@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.test.context.ActiveProfiles;
 
 import static com.wordgame.generator.model.BonusVariant.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -12,6 +13,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 
 
 @Slf4j
+@ActiveProfiles("test")
 public class GeneratorSquareTest {
 
     private ReadFileWord readFileWord;
@@ -66,7 +68,7 @@ public class GeneratorSquareTest {
                         k.x >=0 && k.x < countRow && k.y >=0 && k.y < countColumn));
         bonus.forEach((k,v) ->
                 assertTrue("Вектор " + k + " содержит недопустисый бонус",
-                        v.equals(X_2) || v.equals(X_3) || v.equals(C_2) || v.equals(C_3)));
+                        v.equals(x2) || v.equals(x3) || v.equals(c2) || v.equals(c3)));
     }
 
 }
