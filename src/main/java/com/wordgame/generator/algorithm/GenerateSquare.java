@@ -59,8 +59,8 @@ public class GenerateSquare {
 
         betterAllWord = betterAllWord.stream().sorted().collect(Collectors.toList());
 
-        log.info("Count word = {}", betterAllWord.size());
-        log.info("Time = {}", (System.currentTimeMillis()-time));
+        log.debug("Count word = {}", betterAllWord.size());
+        log.debug("Time = {}", (System.currentTimeMillis()-time));
 
         return betterArrayLetter;
     }
@@ -202,7 +202,7 @@ public class GenerateSquare {
         // запускаем алгоритм поиска всех путей из одной точки в другую
         var time = System.currentTimeMillis();
         dict.forEach((k,v) -> findPath(dict, k));
-        log.info("Проход по дереву занял - {}",(System.currentTimeMillis() - time));
+        log.debug("Go by tree for - {}ms",(System.currentTimeMillis() - time));
     }
 
     public void findPath(Map<Vector2Int, List<Vector2Int>> dict, Vector2Int start)

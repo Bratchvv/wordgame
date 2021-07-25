@@ -1,6 +1,5 @@
 package com.wordgame.generator.algorithm;
 
-import com.google.common.collect.Lists;
 import com.wordgame.generator.model.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,11 +11,12 @@ import java.util.Map;
 public class GeneratorAdapter {
 
     public GeneratorResult generate(GeneratorInputParams inputParams) {
+        var time = System.currentTimeMillis();
         var read = processReadFileWord(inputParams);
         var generator = processGenerateSquare(read,inputParams);
         var chars = generator.maxCountGenerateBox();
         var bonus = BonusAlgorithm.generateBonusPosition(inputParams.getCountRow(), inputParams.getCountColumn());
-        logStatistics(generator, chars, bonus);
+        logStatistics(generator, chars, bonus, (System.currentTimeMillis()-time));
         List<Bonus> bonuses = new ArrayList<>(4);
         bonus.forEach((k,v) -> bonuses.add(Bonus.builder().vector(new Vector(k.x, k.y)).bonusVariant(v).build()));
 
@@ -33,14 +33,15 @@ public class GeneratorAdapter {
     }
 
     ReadFileWord processReadFileWord(GeneratorInputParams inputParams) {
-        return new ReadFileWord(inputParams.getDictionaryWords());
+        return inputParams.getReadFileWord() == null ?
+                new ReadFileWord(inputParams.getDictionaryWords()) : inputParams.getReadFileWord();
     }
 
     GenerateSquare processGenerateSquare(ReadFileWord read, GeneratorInputParams inputParams) {
         return new GenerateSquare(read,inputParams.getCountColumn(), inputParams.getCountRow());
     }
 
-    private void logStatistics(GenerateSquare generator, char[] chars, Map<Vector2Int, BonusVariant> bonus) {
+    private void logStatistics(GenerateSquare generator, char[] chars, Map<Vector2Int, BonusVariant> bonus, long time) {
         StringBuilder sbLetters = new StringBuilder("[");
         for (int i = 0; i < generator.countRow; i++)
         {
@@ -55,6 +56,7 @@ public class GeneratorAdapter {
         bonus.forEach((k,v) -> sbBonus.append(k).append("-").append(v));
         sbBonus.append("]");
 
-        log.info("Generate letters: {}, words: {}, bonus: {}", sbLetters, generator.betterAllWord.size(), sbBonus);
+        log.info("Generate letters: {}, words: {}, bonus: {}, execution time: {}ms",
+                sbLetters, generator.betterAllWord.size(), sbBonus, time);
     }
 }

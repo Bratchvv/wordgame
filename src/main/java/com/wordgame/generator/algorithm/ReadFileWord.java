@@ -15,7 +15,7 @@ import java.util.*;
 public class ReadFileWord {
 
     // список букв доступных для рендомного выбора, что бы заполнять пустые клетки в поле
-    public char[] letters = new char[]{'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и', 'а', 'о',
+    char[] letters = new char[]{'а', 'о', 'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и', 'а', 'о',
             'у', 'ы', 'э', 'я', 'е', 'ё', 'ю', 'и', 'б', 'в', 'г', 'д', 'й', 'ж', 'з', 'к', 'л',
             'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ'};
 
@@ -63,7 +63,7 @@ public class ReadFileWord {
 
                 }
             });
-        log.info("Чтение заняло - " + (System.currentTimeMillis() - time));
-        log.info("Кол-во слов - " + charStrings.size());
+        log.debug("File read by {}ms", (System.currentTimeMillis() - time));
+        log.debug("Sum words count = {}", charStrings.size());
     }
 }

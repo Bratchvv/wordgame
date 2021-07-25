@@ -1,4 +1,4 @@
-package com.wordgame.generator;
+package com.wordgame.generator.service;
 
 import com.wordgame.generator.algorithm.GeneratorAdapter;
 import com.wordgame.generator.model.GeneratorInputParams;
@@ -21,6 +21,7 @@ public class GeneratorService {
                 .countRow(5)
                 .countColumn(5)
                 .dictionaryWords(inMemDictionaryService.getInMemWordDictionary())
+                .readFileWord(inMemDictionaryService.getInMemReadFileWord())
                 .build());
     }
 }
