@@ -1,14 +1,30 @@
-package com.wordgame.generator;
+package com.wordgame.generator.algorithm;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Stream;
+
+/**
+ * @author Vladimir Bratchikov
+ */
 public class GeneratorMain {
 
     public static void main(String[] args) {
-        var read = new ReadFileWord();
-        read.readAndBuildTree();
 
+        List<String> words = new LinkedList<>();
+        try (Stream<String> lines = Files.lines(Paths.get("words.txt"), Charset.defaultCharset())) {
+            lines.forEachOrdered(words::add);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        var read = new ReadFileWord(words);
         var generator = new GenerateSquare(read,5,5);
         var chars = generator.maxCountGenerateBox();
-
         var bonus = Bonus.generateBonusPosition(5, 5);
 
         for (int i = 0; i < generator.countRow; i++)

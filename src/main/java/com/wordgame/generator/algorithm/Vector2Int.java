@@ -1,8 +1,11 @@
-package com.wordgame.generator;
+package com.wordgame.generator.algorithm;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 
+/**
+ * @author Vladimir Bratchikov
+ */
 @EqualsAndHashCode
 @AllArgsConstructor
 public class Vector2Int {

@@ -1,5 +1,3 @@
-mvn.project.version: ${project.version}
-
 server:
   port: 8050
   compression:

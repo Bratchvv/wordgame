@@ -1,4 +1,4 @@
-package com.wordgame.generator;
+package com.wordgame.generator.algorithm;
 
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -7,6 +7,9 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
+/**
+ * @author Vladimir Bratchikov
+ */
 @Slf4j
 public class GenerateSquare {
 
@@ -18,9 +21,6 @@ public class GenerateSquare {
 
     // здесь хранится список слов полученный при лучшей генерации
     List<String> betterAllWord = new ArrayList<>();
-
-    // ссылка на дерево
-    Map<Character, Letter> treeWord;
 
     // Size Cell
     int countColumn;
@@ -40,8 +40,6 @@ public class GenerateSquare {
     public GenerateSquare(ReadFileWord readFileWord, int countColumn, int countRow)
     {
         read = readFileWord;
-        // кешируем дерево
-        treeWord = read.treeWord;
         this.countColumn = countColumn;
         this.countRow = countRow;
     }
@@ -76,14 +74,6 @@ public class GenerateSquare {
         // преобразуем из одномерного в двумерный массив
         cellLetter = getCell(arrayRandomLetters);
 
-        // для теста
-//        cellLetter = new char[][] { {'п', 'д', 'л', 'д', 'з' },
-//            {'а', 'з', 'а', 'д', 'м' },
-//            {'с', 'з', 'к', 'р', 'у'},
-//            {'в', 'о', 'к', 'ь', 'з'},
-//            { 'о', 'с', 'о', 'н', 'л'},
-//        };
-
         // поиск слов в сгенерированном поле
         findAllWord();
 
@@ -98,7 +88,7 @@ public class GenerateSquare {
         }
     }
 
-    private char[][] getCell(char[] arrayLetters)
+    char[][] getCell(char[] arrayLetters)
     {
         var cellChar = new char[countRow][countColumn];
 
@@ -256,9 +246,9 @@ public class GenerateSquare {
             // прекращаем поиск если видим что слов начинающихся с найденной последовательности символов не существует
             if (currentLetter == null)
             {
-                if (treeWord.containsKey(cellLetter[i.x][i.y]))
+                if (read.treeWord.containsKey(cellLetter[i.x][i.y]))
                 {
-                    currentLetter = treeWord.get(cellLetter[i.x] [i.y]);
+                    currentLetter = read.treeWord.get(cellLetter[i.x] [i.y]);
                     currentWord.add(currentLetter.symbol);
                 }
                     else

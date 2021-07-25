@@ -16,13 +16,13 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author Vladimir Bratchikov
+ */
 @SpringBootApplication
 @EnableSwagger2
 @Slf4j
 public class WordgameApplication {
-
-    @Value("${mvn.project.version}")
-    private String version;
 
     public static void main(String[] args) {
         SpringApplication.run(WordgameApplication.class, args);
@@ -31,7 +31,7 @@ public class WordgameApplication {
 
     @EventListener(ApplicationReadyEvent.class)
     public void afterInit() {
-        log.info("LOAD WORDGAME SERVER APP V - {}", version);
+        log.info("LOAD WORDGAME SERVER APP V - {}", "1.0");
     }
 
     @Bean

@@ -1,9 +1,12 @@
-package com.wordgame.generator;
+package com.wordgame.generator.algorithm;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * @author Vladimir Bratchikov
+ */
 public class Letter {
 
     // буква
