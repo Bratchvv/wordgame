@@ -1,4 +1,4 @@
-package com.wordgame.generator.algorithm;
+package com.wordgame.generator.model;
 
 /**
  * @author Vladimir Bratchikov

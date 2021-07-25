@@ -27,3 +27,10 @@ spring:
 spring.main.allow-bean-definition-overriding: true
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
 management.metrics.binders.hystrix.enabled: false
+
+dictionary:
+  source: opt/dictionary/words.txt
+
+rfc:
+  generator: true
+  count: 1000

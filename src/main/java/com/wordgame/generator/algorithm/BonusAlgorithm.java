@@ -1,6 +1,7 @@
 package com.wordgame.generator.algorithm;
 
 import com.google.common.collect.Lists;
+import com.wordgame.generator.model.BonusVariant;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +9,7 @@ import java.util.Map;
 /**
  * @author Vladimir Bratchikov
  */
-public class Bonus {
+public class BonusAlgorithm {
 
     static Map<Vector2Int, BonusVariant> generateBonusPosition(int countRow, int countColumn) {
         var dict = new HashMap<Vector2Int, BonusVariant>();
