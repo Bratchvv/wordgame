@@ -8,7 +8,7 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 class WordgameApplicationTests {
 
-    @Test
+//    @Test
     void contextLoads() {
     }
 

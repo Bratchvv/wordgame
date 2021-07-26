@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/v1/test/generator", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/v1/test/generator", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FunctionalTestController {
 
     private final GeneratorService generatorService;

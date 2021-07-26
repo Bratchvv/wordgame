@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml" >
+<head>
+  <title>Login</title>  <!-- заголовок страницы -->
+  <style>
+    .app-loading {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99999;
+    }
+
+    #loader {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff70;
+    }
+
+    .loading-icon {
+      width: 200px;
+    }
+
+    .app-loading .spinner {
+      height: 300px;
+      width: 300px;
+      animation: rotate 3s linear infinite;
+      transform-origin: center center;
+    }
+
+    .app-loading .spinner .path {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      animation: dash 2.5s ease-in-out infinite;
+      stroke-linecap: round;
+      stroke: #5991dd;
+    }
+
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        opacity: 0.8;
+      }
+      50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+        opacity: 1;
+      }
+      100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+        opacity: 0.9;
+      }
+    }
+  </style>
+  <link th:href="@{~/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+  <link th:href="@{~/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css"/>
+  <link th:href="@{~/css/styles.css}" rel="stylesheet" type="text/css"/>
+  <link th:href="@{~/css/fonts.css}" rel="stylesheet" type="text/css"/>
+  <link th:href="@{~/css/login.css}" rel="stylesheet" type="text/css"/>
+
+  <link th:href="@{/management/css/bootstrap.min.css}" rel="stylesheet" type="text/css"/>
+  <link th:href="@{/management/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css"/>
+  <link th:href="@{/management/css/styles.css}" rel="stylesheet" type="text/css"/>
+  <link th:href="@{/management/css/fonts.css}" rel="stylesheet" type="text/css"/>
+  <link th:href="@{/management/css/login.css}" rel="stylesheet" type="text/css"/>
+
+</head>
+<body class="em-body">
+<div class="main">
+  <div class="toolbar">
+    <h1>Word Game Management</h1>
+  </div>
+
+  <div class="work-block" style="display: flex;align-items: center;justify-content: flex-start;padding-left: 24px;">
+
+      <div class="formbg">
+        <div class="formbg-inner padding-horizontal--48">
+          <span class="padding-bottom--15">Sign in to your account</span>
+          <form id="stripe-login" name='f' th:action="@{/j_spring_security_check}" method='POST'>
+            <div class="field padding-bottom--24">
+              <label for="username">Username</label>
+              <input type='text' name='username' value=''/>
+            </div>
+            <div class="field padding-bottom--24">
+              <div class="grid--50-50">
+                <label for="password">Password</label>
+              </div>
+              <input type='password' name='password' />
+            </div>
+            <div class="field field-checkbox padding-bottom--24 flex-flex align-center">
+              <label for="checkbox">
+                <input type="checkbox" name="remember-me" /> Remember me
+              </label>
+            </div>
+            <div class="field padding-bottom--24">
+              <input type="submit" name="submit" value="Login">
+            </div>
+          </form>
+          <div th:if="${#request.getParameter('error') == 'true'}">
+            <span  style="color:#cb6e6e" >Login failed. Check your login or password.</span>
+          </div>
+        </div>
+    </div>
+
+  </div>
+
+  <div class="footer-block">
+    <span style="font-size: 16px;">©Copyright WordGame, 2021</span>
+  </div>
+</div>
+
+</body>
+</html>

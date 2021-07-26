@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"><!-- подключение синтаксиса thymeleaf-->
+  <head>
+    <title>Access Denied</title>  <!-- заголовок страницы -->
+  </head>
+
+  <body>   <!-- тело страницы -->
+    <!-- message - это параметр из модели который мы сохраняли в контроллере -->
+    <h3 th:if="${message != null}" th:utext="${message}" style="color: red;"></h3>
+    <!-- employeeInfo - это параметр из модели который мы сохраняли в контроллере -->
+    <div th:if="${employeeInfo != null}" th:utext="${employeeInfo}"></div>
+  </body>
+
+</html>

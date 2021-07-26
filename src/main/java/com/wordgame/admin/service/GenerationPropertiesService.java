@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
 public class GenerationPropertiesService {
 
     public int getBufferSize() {
-        return 100; // TODO тянуть из БД с кешем
+        return 5; // TODO тянуть из БД с кешем
     }
 }

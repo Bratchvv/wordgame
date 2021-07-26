@@ -1,0 +1,75 @@
+package com.wordgame.admin.config;
+
+import com.google.common.collect.Lists;
+import com.wordgame.admin.model.PageInfo;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
+/**
+ * Конфиг для перехватчика http
+ *
+ * @author Vladimir Bbratchikov
+ */
+@Component
+@RequiredArgsConstructor
+public class HttpInterceptor implements HandlerInterceptor {
+
+    private final Session session;
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        selectedPage(request, response);
+        return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, //
+                           Object handler, ModelAndView modelAndView) {
+        selectedPage(request, response, modelAndView);
+    }
+
+    private void selectedPage(HttpServletRequest request, HttpServletResponse response, ModelAndView modelAndView) {
+
+        String selectedPage = selectedPage(request, response);
+        if (nonNull(modelAndView)) {
+            modelAndView.addObject("pagesList", Lists.newArrayList(
+                    new PageInfo("", ""),
+                    new PageInfo("rating", "/management/rating"),
+                    new PageInfo("properties", "/management/properties"),
+                    new PageInfo("backup", "/management/backup")
+            ));
+            modelAndView.addObject("selectedPage", selectedPage);
+        }
+    }
+
+    private String selectedPage(HttpServletRequest request, HttpServletResponse response) {
+
+        String selectedPage;
+        if (isNull(request.getCookies())) {
+            selectedPage = "/management/rating";
+        } else {
+            selectedPage = Arrays.stream(request.getCookies())
+                .filter(c -> "selectedPage".equals(c.getName()))
+                .map(Cookie::getValue)
+                .findFirst()
+                .orElse("/management/rating");
+        }
+        Cookie cookie = new Cookie("selectedPage", selectedPage.toString());
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        session.setCurrentPage(selectedPage);
+        return selectedPage;
+    }
+
+}

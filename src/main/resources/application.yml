@@ -14,6 +14,9 @@ logging:
   level:
     ROOT: INFO
 
+spring:
+  thymeleaf:
+    enabled: true
 ---
 spring:
   profiles:
@@ -41,7 +44,7 @@ rfc:
     generator: false
     count: 1000
   buffered:
-    generator: true
+    generator: false
     count: 1000
 ---
 spring:
