@@ -2,6 +2,10 @@ create schema management;
 create schema gameplay;
 create schema statistics;
 
+create sequence management.hibernate_sequence;
+create sequence gameplay.hibernate_sequence;
+create sequence statistics.hibernate_sequence;
+
 CREATE TABLE management.employee
 (
     id serial NOT NULL,

@@ -1,4 +1,4 @@
-package com.wordgame.admin.entity;
+package com.wordgame.management.entity;
 
 
 import lombok.*;
@@ -20,8 +20,9 @@ import java.util.Objects;
 public class EmployeeRole {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
+    @SequenceGenerator(name = "id_employee_role_generator", sequenceName = "id_employee_role_seq", allocationSize = 50)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

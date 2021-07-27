@@ -1,6 +1,8 @@
 package com.wordgame.generator.service;
 
+import com.google.common.collect.Lists;
 import com.wordgame.generator.algorithm.ReadFileWord;
+import com.wordgame.management.entity.GameWords;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +15,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -69,6 +72,12 @@ public class InMemDictionaryService {
             e.printStackTrace();
             return;
         }
+        fullUpdate(words);
+    }
+
+    public void fullUpdateFromEntity(GameWords gameWords) {
+        List<String> words = new LinkedList<>(Arrays.asList(
+                gameWords.getData().replaceAll("\r","").split("\n")));
         fullUpdate(words);
     }
 }

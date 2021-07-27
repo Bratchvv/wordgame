@@ -39,6 +39,8 @@ public class GeneratorAdapterTest {
                .dictionaryWords(words)
                .countColumn(countColumn)
                .countRow(countRow)
+               .maxIteration(10)
+               .minCountWord(100)
                .build();
        readFileWord = new ReadFileWord(words);
     }
@@ -49,7 +51,8 @@ public class GeneratorAdapterTest {
         var generatorSpy = Mockito.spy(generator);
 
         var generateSquare = new GenerateSquare(readFileWord,
-                generatorInputParams.getCountColumn(),generatorInputParams.getCountRow());
+                generatorInputParams.getCountColumn(),generatorInputParams.getCountRow(),
+                generatorInputParams.getMaxIteration(), generatorInputParams.getMinCountWord());
         var generateSquareSpy = Mockito.spy(generateSquare);
         Mockito.doReturn(TEST_CHARS).when(generateSquareSpy).getCell(any());
         Mockito.doReturn(generateSquareSpy).when(generatorSpy).processGenerateSquare(any(), any());

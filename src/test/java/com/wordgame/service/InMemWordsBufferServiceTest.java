@@ -1,6 +1,6 @@
 package com.wordgame.service;
 
-import com.wordgame.admin.service.GenerationPropertiesService;
+import com.wordgame.management.service.GenerationPropertiesService;
 import com.wordgame.generator.model.GeneratorResult;
 import com.wordgame.generator.service.GeneratorService;
 import com.wordgame.generator.service.InMemWordsBufferService;

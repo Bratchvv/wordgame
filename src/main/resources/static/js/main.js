@@ -74,7 +74,7 @@ function showSnackPopup(message, key)
     if(x)
     {
       x.className = "snackbar show";
-      setTimeout(function() { x.className = x.className.replace("show", ""); }, 3000);
+      setTimeout(function() { x.className = x.className.replace("show", ""); }, 10000);
     }
   }
 }

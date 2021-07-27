@@ -19,6 +19,9 @@ public class GeneratorSquareTest {
     private ReadFileWord readFileWord;
     private int countColumn = 5;
     private int countRow = 5;
+    private int maxIteration = 10;
+    private int minCountWord = 100;
+
 
     private static final char[][] TEST_CHARS = new char[][] {
             {'п', 'д', 'л', 'д', 'з' },
@@ -37,7 +40,7 @@ public class GeneratorSquareTest {
     @Test
     void checkGeneratedWords() {
 
-        var generator = new GenerateSquare(readFileWord,countColumn,countRow);
+        var generator = new GenerateSquare(readFileWord,countColumn,countRow, maxIteration, minCountWord);
         var generatorSpy = Mockito.spy(generator);
         Mockito.doReturn(TEST_CHARS).when(generatorSpy).getCell(any());
         var chars = generatorSpy.maxCountGenerateBox();
@@ -54,7 +57,7 @@ public class GeneratorSquareTest {
     @Test
     void checkGeneratedLetters() {
 
-        var generator = new GenerateSquare(readFileWord,countColumn,countRow);
+        var generator = new GenerateSquare(readFileWord,countColumn,countRow, maxIteration, minCountWord);
         var chars = generator.maxCountGenerateBox();
         assertEquals("Размер сгенерированного набора символов не совпадает с ожидаемым",
                 25, chars.length);

@@ -1,4 +1,4 @@
-package com.wordgame.admin.entity;
+package com.wordgame.management.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -15,7 +15,8 @@ import java.util.Objects;
 public class Employee {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "id_employee_generator", sequenceName = "id_employee_seq", allocationSize = 50)
     @Column(name = "id", nullable = false)
     private Long id;
 

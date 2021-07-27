@@ -127,17 +127,25 @@ table {border-collapse: collapse;border-spacing: 0;}
 
 .pretty-input-file + label {
   color: #fff6fe;
-  background-color: #4c7bdb;
+  background-color: rgb(84, 105, 212);
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+  rgba(0, 0, 0, 0.12) 0px 1px 1px 0px,
+  rgb(84, 105, 212) 0px 0px 0px 1px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+  rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+  rgba(60, 66, 87, 0.08) 0px 2px 5px 0px;
+  font-weight: 600;
   padding: 9px;
   font-size: 16px;
   border: none;
-  font-weight: normal;
   cursor: pointer;
   margin: 0;
+  border-radius: 4px;
 }
 
 .pretty-input-file:focus + label,
 .pretty-input-file.has-focus + label,
 .pretty-input-file + label:hover {
-  background-color: #405eb9;
+  background-color: rgb(101, 119, 208);
 }

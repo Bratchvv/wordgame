@@ -1,9 +1,9 @@
-package com.wordgame.admin.service;
+package com.wordgame.management.service;
 
 
-import com.wordgame.admin.entity.Employee;
-import com.wordgame.admin.repository.EmployeeRepository;
-import com.wordgame.admin.repository.EmployeeRoleRepository;
+import com.wordgame.management.entity.Employee;
+import com.wordgame.management.repository.EmployeeRepository;
+import com.wordgame.management.repository.EmployeeRoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

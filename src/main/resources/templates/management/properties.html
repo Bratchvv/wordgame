@@ -1,25 +1,65 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sd="http://www.thymeleaf.org/spring-data"
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sd="http://www.thymeleaf.org/spring-data"
       layout:decorate="~{fragments/workspace}">
 <head>
-  <title>WordGame Management Properties</title>
+    <title>WordGame Management Properties</title>
 </head>
 <body>
 <div layout:fragment="content" class="container">
 
-  <div class="actions-panel">
-    <h4>
-      properties.html
-    </h4>
-
-    <div class="actions">
-      <span>actions</span>
+    <div class="actions-panel">
+        <h4>
+            Properties page
+        </h4>
     </div>
-  </div>
 
-  <div class="page-table">
+    <div class="page-table" style="display: flex; flex-wrap: wrap">
+        <div style="width: 700px; padding: 24px">
+            <form action="#" th:action="@{/management/properties/update}" th:object="${propertiesData}" method="post">
+                <table>
+                    <tr style="width: 700px" th:each="auth, itemStat: ${propertiesData.properties}">
+                        <td>
+                            <div class="field" style="padding: 8px">
+                                <input type="hidden" th:field="*{properties[__${itemStat.index}__].id}">
+                                <input type="hidden" th:field="*{properties[__${itemStat.index}__].name}">
+                                <input type="hidden" th:field="*{properties[__${itemStat.index}__].label}">
+                                <label class="header"
+                                       th:for="'property-' + ${itemStat.index}"
+                                       th:text="'' + *{properties[__${itemStat.index}__].label} + ':'">
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="field" style="padding: 8px">
+                                <input th:name="'property-' + ${itemStat.index}"
+                                       th:field="*{properties[__${itemStat.index}__].value}">
+                            </div>
+                        </td>
+                    </tr>
 
-  </div>
+                </table>
+                <div class="field" style="width: 100px;">
+                    <input type="submit" value="Update"/>
+                </div>
+            </form>
+        </div>
+        <div style="width: 700px; padding: 24px">
+
+            <h4 th:text="'Активный словарь: ' + ${propertiesData.getGameWordsInfo().name} + ' от ' + ${propertiesData.getGameWordsInfo().date}"></h4>
+            <form name="uploadingForm" method="POST" th:action="@{/management/properties/words}"
+                  enctype="multipart/form-data">
+                <div class="flex-center">
+                    <input id="words" type="file" name="uploadingFile" class="pretty-input-file"
+                           data-multiple-caption="{count} files selected">
+                    <label for="words"><span style="color: white">Загрузить словарь</span></label>
+                    <button class="action-button action-button--split" type="submit" value="Загрузить словарь">
+                        <i class="material-icons" style="color: white">file_upload</i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>

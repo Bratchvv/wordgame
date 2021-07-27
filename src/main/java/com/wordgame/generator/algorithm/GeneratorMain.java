@@ -23,7 +23,7 @@ public class GeneratorMain {
         }
 
         var read = new ReadFileWord(words);
-        var generator = new GenerateSquare(read,5,5);
+        var generator = new GenerateSquare(read,5,5, 10, 100);
         var chars = generator.maxCountGenerateBox();
         var bonus = BonusAlgorithm.generateBonusPosition(5, 5);
 

@@ -15,9 +15,9 @@ public class GenerateSquare {
 
     // Параметры отвечающие за генерацию лучшего результата
     // количество попыток генерации
-    int maxIteration = 10;
+    int maxIteration;
     // минимальное количество слов при котором генерация считается успешной
-    int minCountWord = 100;
+    int minCountWord;
 
     // здесь хранится список слов полученный при лучшей генерации
     List<String> betterAllWord = new ArrayList<>();
@@ -37,11 +37,13 @@ public class GenerateSquare {
     // список из лучших сгенерированных букв
     private char[] betterArrayLetter;
 
-    public GenerateSquare(ReadFileWord readFileWord, int countColumn, int countRow)
+    public GenerateSquare(ReadFileWord readFileWord, int countColumn, int countRow, int maxIteration, int minCountWord)
     {
         read = readFileWord;
         this.countColumn = countColumn;
         this.countRow = countRow;
+        this.maxIteration = maxIteration;
+        this.minCountWord = minCountWord;
     }
 
     public char[] maxCountGenerateBox()

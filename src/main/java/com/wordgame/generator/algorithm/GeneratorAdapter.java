@@ -38,7 +38,8 @@ public class GeneratorAdapter {
     }
 
     GenerateSquare processGenerateSquare(ReadFileWord read, GeneratorInputParams inputParams) {
-        return new GenerateSquare(read,inputParams.getCountColumn(), inputParams.getCountRow());
+        return new GenerateSquare(read,inputParams.getCountColumn(), inputParams.getCountRow(),
+                inputParams.getMaxIteration(), inputParams.getMinCountWord());
     }
 
     private void logStatistics(GenerateSquare generator, char[] chars, Map<Vector2Int, BonusVariant> bonus, long time) {

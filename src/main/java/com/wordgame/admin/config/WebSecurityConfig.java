@@ -1,6 +1,6 @@
 package com.wordgame.admin.config;
 
-import com.wordgame.admin.service.EmployeeDetailsServiceImpl;
+import com.wordgame.management.service.EmployeeDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

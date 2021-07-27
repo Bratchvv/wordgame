@@ -6,6 +6,9 @@ server:
   http2:
     enabled: true
 
+spring.servlet.multipart.maxFileSize: 10MB
+spring.servlet.multipart.maxRequestSize: 10MB
+
 spring.main.allow-bean-definition-overriding: true
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
 management.metrics.binders.hystrix.enabled: false
@@ -17,6 +20,34 @@ logging:
 spring:
   thymeleaf:
     enabled: true
+  jpa:
+    #optional - show SQL statements in console.
+    #show-sql: true
+    properties:
+      javax:
+        persistence:
+          sharedCache:
+            #required - enable selective caching mode - only entities with @Cacheable annotation will use L2 cache.
+            mode: ENABLE_SELECTIVE
+      hibernate:
+        #optional - enable SQL statements formatting.
+        #format_sql: true
+        #optional - generate statistics to check if L2/query cache is actually being used.
+        #generate_statistics: true
+        cache:
+          #required - turn on L2 cache.
+          use_second_level_cache: true
+          #optional - turn on query cache.
+          use_query_cache: true
+          region:
+            #required - classpath to cache region factory.
+            factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+        javax:
+          persistence:
+            sharedCache:
+              mode: ALL
+          cache:
+            missing_cache_strategy: create
 ---
 spring:
   profiles:
@@ -30,7 +61,7 @@ spring:
   #Данные подключения к БД
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/wordgame
+    url: jdbc:postgresql://localhost:5432/wordgamedb
     type: com.zaxxer.hikari.HikariDataSource
     username: postgres
     password: postgres

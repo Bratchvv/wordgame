@@ -1,4 +1,4 @@
-package com.wordgame.admin.entity;
+package com.wordgame.management.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;

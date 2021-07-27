@@ -1,6 +1,6 @@
-package com.wordgame.admin.repository;
+package com.wordgame.management.repository;
 
-import com.wordgame.admin.entity.Employee;
+import com.wordgame.management.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

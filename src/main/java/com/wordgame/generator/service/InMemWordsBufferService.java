@@ -1,25 +1,17 @@
 package com.wordgame.generator.service;
 
-import com.wordgame.admin.service.GenerationPropertiesService;
+import com.wordgame.management.service.GenerationPropertiesService;
 import com.wordgame.generator.model.GeneratorResult;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-import java.util.stream.Stream;
 
 /**
  * @author Vladimir Bratchikov

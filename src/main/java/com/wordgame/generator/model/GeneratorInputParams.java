@@ -14,5 +14,7 @@ public class GeneratorInputParams {
     private ReadFileWord readFileWord;
     private int countColumn;
     private int countRow;
+    private int maxIteration;
+    private int minCountWord;
 
 }
