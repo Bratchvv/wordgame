@@ -1,6 +1,6 @@
-package com.wordgame.gameplay.entity;
+package com.wordgame.statistics.entity;
 
-import com.wordgame.statistics.entity.RatingTableData;
+import com.wordgame.gameplay.entity.Player;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -8,7 +8,6 @@ import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Getter
 @Setter
@@ -17,12 +16,12 @@ import java.util.Collection;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
-@Table(name = "player", schema = "gameplay")
-public class Player {
+@Table(name = "rating_table_data", schema = "statistics")
+public class RatingTableData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "id_player_generator", sequenceName = "id_player_seq", allocationSize = 50)
+    @SequenceGenerator(name = "id_rating_data_generator", sequenceName = "id_rating_data_seq", allocationSize = 50)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -30,9 +29,14 @@ public class Player {
     private String name;
 
     @Column
-    private String urlAvatar;
+    private Integer value;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "health_id", referencedColumnName = "id")
-    private Health health;
-}
+    @Column
+    private Long playerId;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rating_table_id")
+    private RatingTable ratingTable;
+
+};
