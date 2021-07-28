@@ -67,7 +67,7 @@ spring:
     password: postgres
     hikari:
       connection-timeout: 30000
-      maximum-pool-size: 100
+      maximum-pool-size: 10
 dictionary:
   source: opt/dictionary/words.txt
 rfc:
