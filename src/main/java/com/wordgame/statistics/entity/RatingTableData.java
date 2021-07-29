@@ -31,12 +31,12 @@ public class RatingTableData {
     @Column
     private Integer value;
 
-    @Column
-    private Long playerId;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player player;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rating_table_id")
     private RatingTable ratingTable;
 
-};
+}

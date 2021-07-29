@@ -25,7 +25,7 @@ public class PlayerController {
     private final PlayerService playerService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPlayerData(@PathVariable Long id) {
+    public ResponseEntity<?> getPlayerData(@PathVariable String id) {
         try {
             return ResponseEntity.ok(playerService.getPlayerData(id));
         } catch (Exception e) {

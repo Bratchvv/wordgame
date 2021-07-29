@@ -34,9 +34,6 @@ public class Health {
     @Column
     private Long timeUTCSaving;
 
-    @Column
-    private Long timeUTCNow;
-
     @OneToOne(mappedBy = "health", cascade = CascadeType.ALL)
     private Player player;
 }

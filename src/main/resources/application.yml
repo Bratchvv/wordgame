@@ -1,5 +1,5 @@
 server:
-  port: 8050
+  port: 8051
   compression:
     enabled: true
     min-response-size: 1KB

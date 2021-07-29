@@ -3,6 +3,8 @@ CREATE TABLE statistics.rating_table
 (
     id serial NOT NULL,
     name text NOT NULL,
+    start_date date,
+    expire_day_count integer,
     CONSTRAINT uk_rating_table_id UNIQUE (id),
     CONSTRAINT uk_rating_table_name UNIQUE (name)
 );
@@ -12,7 +14,7 @@ CREATE TABLE statistics.rating_table_data
     id serial NOT NULL,
     name text NOT NULL,
     value integer NOT NULL,
-    player_id bigint NOT NULL,
+    player_id text NOT NULL references gameplay.player (id),
     rating_table_id bigint NOT NULL references statistics.rating_table (id),
     CONSTRAINT uk_player_id UNIQUE (id),
     CONSTRAINT uk_name_player_id UNIQUE (name, player_id)

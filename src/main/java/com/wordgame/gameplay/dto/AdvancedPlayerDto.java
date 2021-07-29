@@ -9,7 +9,7 @@ public class AdvancedPlayerDto extends PlayerDto {
 
     private HealthDto health;
 
-    public AdvancedPlayerDto(Long id, String name, String urlAvatar, HealthDto health) {
+    public AdvancedPlayerDto(String id, String name, String urlAvatar, HealthDto health) {
         super(id, name, urlAvatar);
         this.health = health;
     }

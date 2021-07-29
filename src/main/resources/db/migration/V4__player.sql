@@ -11,7 +11,7 @@ CREATE TABLE gameplay.health
 
 CREATE TABLE gameplay.player
 (
-    id serial NOT NULL,
+    id text primary key NOT NULL,
     name text NOT NULL,
     url_avatar text NOT NULL,
     health_id bigint NOT NULL references gameplay.health (id),

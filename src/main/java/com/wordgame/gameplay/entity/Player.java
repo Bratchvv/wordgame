@@ -21,10 +21,8 @@ import java.util.Collection;
 public class Player {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "id_player_generator", sequenceName = "id_player_seq", allocationSize = 50)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private String id;
 
     @Column
     private String name;
@@ -35,4 +33,8 @@ public class Player {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "health_id", referencedColumnName = "id")
     private Health health;
+
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Collection<RatingTableData> ratingTableData;
 }

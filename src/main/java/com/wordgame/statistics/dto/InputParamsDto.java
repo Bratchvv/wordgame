@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InputParamsDto {
-
-    private Long playerId;
+    private String playerId;
     private String name;
     private Integer value;
+    private Integer expireDayCount;
 }

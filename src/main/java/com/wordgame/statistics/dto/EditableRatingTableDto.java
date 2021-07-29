@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EditableRatingTableDto {
-    private Long id;
     private String name;
+    private Integer expireDayCount;
     private boolean isNew;
 }

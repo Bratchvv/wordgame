@@ -18,8 +18,35 @@ public class RatingTableController {
 
     private final RatingTablesService ratingTablesService;
 
+    //Получение рейтинга.
+    // Передаваемые параметры:
+    // id игрока,
+    // название таблицы,
+    // кол-во записей выше игрока,
+    // кол-во записей ниже игрока,
+    // и кол-во результатов топа.
+    @GetMapping("/top/{id}/{name}")
+    public ResponseEntity<?> getPlayerRatingsData(@PathVariable String id,
+                                                  @PathVariable String name,
+                                                  @RequestParam Integer upperSize,
+                                                  @RequestParam Integer topSize,
+                                                  @RequestParam Integer lowerSize) {
+        try {
+            return ResponseEntity.ok(
+                ratingTablesService.getPlayerRatingsData(id, name, upperSize, topSize, lowerSize)
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(ErrorDto.builder()
+                    .name(e.getClass().getName())
+                    .details(e.getMessage())
+                    .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/player/{id}")
-    public ResponseEntity<?> getPlayerRatingsData(@PathVariable Long id, Pageable pageable) {
+    public ResponseEntity<?> getPlayerRatingsData(@PathVariable String id, Pageable pageable) {
         try {
             return ResponseEntity.ok(ratingTablesService.getRatingsByPlayer(id, pageable));
         } catch (Exception e) {
@@ -33,7 +60,7 @@ public class RatingTableController {
     }
 
     @GetMapping("/player/{id}/{name}")
-    public ResponseEntity<?> getPlayerRatingInTable(@PathVariable Long id, @PathVariable String name) {
+    public ResponseEntity<?> getPlayerRatingInTable(@PathVariable String id, @PathVariable String name) {
         try {
             return ResponseEntity.ok(ratingTablesService.getPlayerRatingInTable(id, name));
         } catch (Exception e) {
@@ -75,10 +102,26 @@ public class RatingTableController {
         }
     }
 
+    @GetMapping("/table")
+    public ResponseEntity<?> getTableRatingsList(Pageable pageable) {
+        try {
+            return ResponseEntity.ok(ratingTablesService.getRatingsTableList(pageable));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(ErrorDto.builder()
+                    .name(e.getClass().getName())
+                    .details(e.getMessage())
+                    .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/table")
     public ResponseEntity<?> createRatingTable(@RequestBody InputParamsDto inputDto) {
         try {
-            return ResponseEntity.ok(ratingTablesService.createRatingTable(inputDto.getName()));
+            return ResponseEntity.ok(
+                ratingTablesService.createRatingTable(inputDto.getName(), inputDto.getExpireDayCount())
+            );
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()

@@ -1,5 +1,6 @@
 package com.wordgame.statistics.entity;
 
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -27,6 +28,12 @@ public class RatingTable {
 
     @Column
     private String name;
+
+    @Column
+    private LocalDate startDate;
+
+    @Column
+    private Integer expireDayCount;
 
     @OneToMany(mappedBy = "ratingTable",
             cascade = CascadeType.ALL, fetch = FetchType.LAZY,
