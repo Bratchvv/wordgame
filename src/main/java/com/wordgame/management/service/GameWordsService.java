@@ -1,25 +1,20 @@
 package com.wordgame.management.service;
 
 import com.wordgame.generator.service.InMemDictionaryService;
-import com.wordgame.management.dto.GamePropertyDto;
 import com.wordgame.management.dto.GameWordsDto;
 import com.wordgame.management.dto.GameWordsInfoDto;
-import com.wordgame.management.entity.GameProperty;
 import com.wordgame.management.entity.GameWords;
-import com.wordgame.management.repository.GamePropertyRepository;
 import com.wordgame.management.repository.GameWordsRepository;
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
-import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
+import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Vladimir Bratchikov
@@ -37,6 +32,11 @@ public class GameWordsService {
                 .map(p -> modelMapper.map(p, GameWordsInfoDto.class))
                 .sorted(Comparator.comparing(GameWordsInfoDto::getId))
                 .collect(Collectors.toList());
+    }
+
+    public Page<GameWordsInfoDto> getPages(Pageable pageable) {
+        return gameWordsRepository.findAll(pageable)
+            .map(v -> modelMapper.map(v, GameWordsInfoDto.class));
     }
 
     public GameWordsInfoDto getActiveWords(Integer category) {

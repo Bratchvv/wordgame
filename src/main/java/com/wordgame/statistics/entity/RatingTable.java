@@ -1,14 +1,22 @@
 package com.wordgame.statistics.entity;
 
-import java.time.LocalDate;
+import java.util.Collection;
+import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import java.util.Collection;
 
 @Getter
 @Setter
@@ -30,10 +38,10 @@ public class RatingTable {
     private String name;
 
     @Column
-    private LocalDate startDate;
+    private Long initTimeUtc;
 
     @Column
-    private Integer expireDayCount;
+    private Integer expireHoursCycle;
 
     @OneToMany(mappedBy = "ratingTable",
             cascade = CascadeType.ALL, fetch = FetchType.LAZY,

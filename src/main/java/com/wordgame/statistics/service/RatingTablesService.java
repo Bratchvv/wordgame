@@ -1,7 +1,13 @@
 package com.wordgame.statistics.service;
 
 import com.wordgame.gameplay.repository.PlayerRepository;
-import com.wordgame.statistics.dto.*;
+import com.wordgame.statistics.dto.EditableRatingTableDataDto;
+import com.wordgame.statistics.dto.EditableRatingTableDto;
+import com.wordgame.statistics.dto.RatingPlayerListDataDto;
+import com.wordgame.statistics.dto.RatingTableDataDto;
+import com.wordgame.statistics.dto.RatingTableDto;
+import com.wordgame.statistics.dto.RatingTableListDataDto;
+import com.wordgame.statistics.dto.RatingTopDto;
 import com.wordgame.statistics.dto.RatingTopDto.Range;
 import com.wordgame.statistics.dto.RatingTopDto.Res;
 import com.wordgame.statistics.entity.RatingTable;
@@ -10,18 +16,16 @@ import com.wordgame.statistics.repository.RatingDataListRepository;
 import com.wordgame.statistics.repository.RatingTableDataRepository;
 import com.wordgame.statistics.repository.RatingTableListRepository;
 import com.wordgame.statistics.repository.RatingTableRepository;
-import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,7 +38,7 @@ public class RatingTablesService {
     private final RatingTableDataRepository ratingTableDataRepository;
     private final RatingDataListRepository ratingDataListRepository;
 
-    public EditableRatingTableDto createRatingTable(String name, Integer expireDays) {
+    public EditableRatingTableDto createRatingTable(String name, Integer expireHoursCycle) {
         var ratingTable = ratingTableRepository.findFirstByName(name);
         var isNew = false;
         if(ratingTable == null) {
@@ -42,8 +46,8 @@ public class RatingTablesService {
             ratingTable.setName(name);
             isNew = true;
         }
-        ratingTable.setExpireDayCount(expireDays);
-        ratingTable.setStartDate(LocalDate.now());
+        ratingTable.setExpireHoursCycle(expireHoursCycle);
+        ratingTable.setInitTimeUtc(OffsetDateTime.now(ZoneOffset.UTC ).toInstant().toEpochMilli());
         ratingTableRepository.save(ratingTable);
         var dto = statisticsModelMapper.map(ratingTable, EditableRatingTableDto.class);
         dto.setNew(isNew);
@@ -102,5 +106,21 @@ public class RatingTablesService {
             .res(List.of(Res.builder().id(id).place(1).name("qedw").urlAvatar("aefwe").value(123).build()))
             .range(List.of(Range.builder().start(0).size(2).build()))
             .build();
+    }
+
+    public void clearRatings() {
+        ratingTableRepository.findAll().forEach(ratingTable -> {
+            var cycle = ratingTable.getExpireHoursCycle();
+            var startTime = ratingTable.getInitTimeUtc();
+            var millis = OffsetDateTime.now(ZoneOffset.UTC ).toInstant().toEpochMilli();
+            if(millis >= (startTime+ cycle*60*60*1000)) {
+                clearRating(ratingTable.getId());
+            }
+        });
+    }
+
+    @Transactional
+    public void clearRating(Long id) {
+        ratingTableDataRepository.deleteAllByRatingTable_Id(id);
     }
 }

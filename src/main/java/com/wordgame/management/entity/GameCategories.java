@@ -41,9 +41,6 @@ public class GameCategories {
     private LocalDateTime date;
 
     @Column
-    private Integer version;
-
-    @Column
     @Convert(converter = ToEntityJsonConverter.class)
     private GameCategoriesData data;
 

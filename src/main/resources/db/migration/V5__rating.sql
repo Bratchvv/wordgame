@@ -3,8 +3,8 @@ CREATE TABLE statistics.rating_table
 (
     id serial NOT NULL,
     name text NOT NULL,
-    start_date date,
-    expire_day_count integer,
+    init_time_utc bigint,
+    expire_hours_cycle integer,
     CONSTRAINT uk_rating_table_id UNIQUE (id),
     CONSTRAINT uk_rating_table_name UNIQUE (name)
 );
