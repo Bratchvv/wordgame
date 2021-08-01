@@ -29,8 +29,11 @@ public class GameCategoriesService {
     }
 
     public boolean checkCategoriesByDate(LocalDateTime clientCategoriesDate) {
-       var currentActive = gameCategoriesRepository.getActiveGameCategories();
-       return currentActive.getDate().equals(clientCategoriesDate);
+       var currentActive = gameCategoriesRepository.findActiveCategoriesDate();
+       if(currentActive == null) {
+           return false;
+       }
+       return currentActive.equals(clientCategoriesDate);
     }
 
     public GameCategoriesDto getActive() {

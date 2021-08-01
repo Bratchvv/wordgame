@@ -1,14 +1,19 @@
 package com.wordgame.management.entity;
 
+import java.time.LocalDateTime;
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,7 +27,8 @@ public class GameWords {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "id_game_words_generator", sequenceName = "id_game_words_seq", allocationSize = 50)
+    @SequenceGenerator(name = "id_game_words_generator",
+        sequenceName = "id_game_words_seq", allocationSize = 50)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -31,9 +37,6 @@ public class GameWords {
 
     @Column
     private LocalDateTime date;
-
-    @Column
-    private Integer category;
 
     @Column
     private String data;

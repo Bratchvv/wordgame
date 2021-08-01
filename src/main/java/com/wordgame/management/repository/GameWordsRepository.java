@@ -12,12 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface GameWordsRepository extends PagingAndSortingRepository<GameWords, Long> {
 
-    @Query(value = "SELECT new com.wordgame.management.dto.GameWordsInfoDto(id, name, date, category, active) FROM GameWords ")
+    @Query(value = "SELECT new com.wordgame.management.dto.GameWordsInfoDto(id, name, date, active) "
+        + " FROM GameWords ")
     List<GameWordsInfoDto> findAllInfo();
 
-    @Query(value = "SELECT new com.wordgame.management.dto.GameWordsInfoDto(id, name, date, category, active) FROM GameWords " +
-            "WHERE active = true and category = :category")
-    GameWordsInfoDto findActiveInfo(Integer category);
+    @Query(value = "SELECT new com.wordgame.management.dto.GameWordsInfoDto(id, name, date, active) "
+        + "FROM GameWords WHERE active = true")
+    GameWordsInfoDto findActiveInfo();
 
-    GameWords findByCategoryAndActive(Integer category, boolean active);
+    GameWords findByActive(boolean active);
 }

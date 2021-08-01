@@ -1,10 +1,10 @@
 package com.wordgame.management.dto;
 
-import lombok.*;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -15,7 +15,6 @@ public class GameWordsDto {
     private Long id;
     private String name;
     private LocalDateTime date;
-    private Integer category;
     private String data;
     private boolean active;
 }

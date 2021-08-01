@@ -11,7 +11,12 @@ spring.servlet.multipart.maxRequestSize: 10MB
 
 spring.main.allow-bean-definition-overriding: true
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
-management.metrics.binders.hystrix.enabled: false
+
+springdoc:
+  api-docs:
+    path: "/api-docs"
+  swagger-ui:
+    path: "/swagger-ui.html"
 
 logging:
   level:

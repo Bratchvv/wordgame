@@ -3,6 +3,7 @@ package com.wordgame.management.controller;
 import com.wordgame.management.dto.GameCategoriesDto;
 import com.wordgame.management.service.GameCategoriesService;
 import com.wordgame.statistics.dto.ErrorDto;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -54,6 +56,23 @@ public class GameCategoriesController {
     public ResponseEntity<?> getTableRatingsData(Pageable pageable) {
         try {
             return ResponseEntity.ok(gameCategoriesService.getPages(pageable));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(ErrorDto.builder()
+                    .name(e.getClass().getName())
+                    .details(e.getMessage())
+                    .build(),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/check-version")
+    public ResponseEntity<?> getActive(@RequestParam LocalDateTime versionDate) {
+        try {
+            if (gameCategoriesService.checkCategoriesByDate(versionDate)) {
+                return ResponseEntity.ok("isActual: true");
+            }
+            return ResponseEntity.ok("isActual: false");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()

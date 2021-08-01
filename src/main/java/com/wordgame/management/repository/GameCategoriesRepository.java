@@ -1,6 +1,7 @@
 package com.wordgame.management.repository;
 
 import com.wordgame.management.entity.GameCategories;
+import java.time.LocalDateTime;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,7 @@ public interface GameCategoriesRepository extends PagingAndSortingRepository<Gam
 
     @Query("from GameCategories where active = true")
     GameCategories getActiveGameCategories();
+
+    @Query("select d.date from GameCategories d where d.active = true")
+    LocalDateTime findActiveCategoriesDate();
 }

@@ -39,20 +39,19 @@ public class GameWordsService {
             .map(v -> modelMapper.map(v, GameWordsInfoDto.class));
     }
 
-    public GameWordsInfoDto getActiveWords(Integer category) {
-        return gameWordsRepository.findActiveInfo(category);
+    public GameWordsInfoDto getActiveWords() {
+        return gameWordsRepository.findActiveInfo();
     }
 
     @Transactional
-    public void addNewWords(String name, Integer category, String data) {
-        GameWords activeInfo = gameWordsRepository.findByCategoryAndActive(category, true);
+    public void addNewWords(String name, String data) {
+        GameWords activeInfo = gameWordsRepository.findByActive( true);
         if(activeInfo != null) {
             activeInfo.setActive(false);
             gameWordsRepository.save(activeInfo);
         }
         GameWordsDto dto = new GameWordsDto();
         dto.setActive(true);
-        dto.setCategory(category);
         dto.setDate(LocalDateTime.now());
         dto.setName(name);
         dto.setData(data);

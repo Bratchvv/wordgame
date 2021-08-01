@@ -1,15 +1,18 @@
-package com.wordgame.management.entity;
+package com.wordgame.gameplay.entity;
 
 import com.wordgame.core.ToEntityJsonConverter;
-import com.wordgame.management.dto.GameCategoriesData;
+import com.wordgame.gameplay.dto.PlayerGameCategoriesData;
 import java.time.LocalDateTime;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -25,26 +28,24 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 @Entity
-@Table(name = "game_categories", schema = "management")
-public class GameCategories {
+@Table(name = "player_game_categories", schema = "gameplay")
+public class PlayerGameCategories {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @SequenceGenerator(name = "id_game_categories_generator",
-        sequenceName = "id_game_categories_seq", allocationSize = 50)
+    @SequenceGenerator(name = "id_player_game_categories_generator",
+        sequenceName = "id_player_game_categories_seq", allocationSize = 50)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column
-    private String name;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player_id")
+    private Player player;
 
     @Column
     private LocalDateTime date;
 
     @Column
     @Convert(converter = ToEntityJsonConverter.class)
-    private GameCategoriesData data;
-
-    @Column
-    private boolean active;
+    private PlayerGameCategoriesData data;
 }

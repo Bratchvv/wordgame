@@ -2,15 +2,14 @@
 CREATE TABLE management.game_words
 (
     id serial NOT NULL,
-    category integer,
     name text NOT NULL,
     date timestamp without time zone NOT NULL,
     data text NOT NULL,
     active boolean NOT NULL default false
 );
 
-INSERT INTO management.game_words(name, category, date, active, data)
-VALUES ('words.txt', 0, '2021-07-28 00:00:00.954084', true,
+INSERT INTO management.game_words(name, date, active, data)
+VALUES ('words.txt', '2021-07-28 00:00:00.954084', true,
 'абажур
 абаз
 абазин

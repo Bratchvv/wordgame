@@ -1,4 +1,4 @@
-package com.wordgame.management.entity;
+package com.wordgame.core;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,7 +6,6 @@ import com.wordgame.management.dto.GameCategoriesData;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import lombok.SneakyThrows;
-import org.reflections.serializers.JsonSerializer;
 
 /**
  * @author Vladimir Bratchikov
