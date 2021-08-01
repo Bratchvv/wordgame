@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+
 /**
  * @author Vladimir Bratchikov
  */
@@ -23,19 +25,24 @@ public class GameCategoriesService {
 
     public GameCategoriesDto saveCategories(GameCategoriesData categories) {
        var currentActive = gameCategoriesRepository.getActiveGameCategories();
-       currentActive.setActive(false);
-       gameCategoriesRepository.save(currentActive);
-       var newActive = gameCategoriesRepository.save(modelMapper.map(categories,
-                                                                     GameCategories.class));
+       if(currentActive != null) {
+           currentActive.setActive(false);
+           gameCategoriesRepository.save(currentActive);
+       }
+        GameCategories gameCategories = new GameCategories();
+        gameCategories.setActive(true);
+        gameCategories.setDate(LocalDateTime.now());
+        gameCategories.setData(categories);
+        var newActive = gameCategoriesRepository.save(gameCategories);
        return modelMapper.map(newActive, GameCategoriesDto.class);
     }
 
-    public boolean checkCategoriesByDate(LocalDateTime clientCategoriesDate) {
-       var currentActive = gameCategoriesRepository.findActiveCategoriesDate();
+    public boolean checkCategoriesByDate(Long id) {
+       var currentActive = gameCategoriesRepository.findActiveCategoriesId();
        if(currentActive == null) {
            return false;
        }
-       return currentActive.equals(clientCategoriesDate);
+       return currentActive.equals(id);
     }
 
     public GameCategoriesDto getActive() {
@@ -43,7 +50,8 @@ public class GameCategoriesService {
     }
 
     public GameCategoriesDto getById(Long id) {
-       return modelMapper.map(gameCategoriesRepository.findById(id), GameCategoriesDto.class);
+       return modelMapper.map(gameCategoriesRepository.findById(id)
+               .orElseThrow(EntityNotFoundException::new), GameCategoriesDto.class);
     }
 
 

@@ -1,6 +1,7 @@
 package com.wordgame.gameplay.entity;
 
-import com.wordgame.core.ToEntityJsonConverter;
+import com.wordgame.core.ToGameCategoriesDataJsonConverter;
+import com.wordgame.core.ToPlayerGameCategoriesDataJsonConverter;
 import com.wordgame.gameplay.dto.PlayerGameCategoriesData;
 import java.time.LocalDateTime;
 import javax.persistence.Cacheable;
@@ -46,6 +47,6 @@ public class PlayerGameCategories {
     private LocalDateTime date;
 
     @Column
-    @Convert(converter = ToEntityJsonConverter.class)
+    @Convert(converter = ToPlayerGameCategoriesDataJsonConverter.class)
     private PlayerGameCategoriesData data;
 }

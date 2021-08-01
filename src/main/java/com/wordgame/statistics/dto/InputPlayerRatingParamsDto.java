@@ -10,12 +10,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class InputParamsDto {
+public class InputPlayerRatingParamsDto {
     @NotBlank
     private String playerId;
     @NotBlank
     private String name;
     @NotBlank
     private Integer value;
-    private Integer expireDayCount;
 }

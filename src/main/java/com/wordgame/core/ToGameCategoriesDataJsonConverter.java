@@ -13,7 +13,7 @@ import lombok.SneakyThrows;
 
 @Converter
 @SuppressWarnings("all")
-public class ToEntityJsonConverter implements AttributeConverter<Object, String> {
+public class ToGameCategoriesDataJsonConverter implements AttributeConverter<Object, String> {
 
     private final static ObjectMapper mapper = new ObjectMapper();
 

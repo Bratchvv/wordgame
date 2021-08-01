@@ -14,6 +14,6 @@ public interface GameCategoriesRepository extends PagingAndSortingRepository<Gam
     @Query("from GameCategories where active = true")
     GameCategories getActiveGameCategories();
 
-    @Query("select d.date from GameCategories d where d.active = true")
-    LocalDateTime findActiveCategoriesDate();
+    @Query("select d.id from GameCategories d where d.active = true")
+    Long findActiveCategoriesId();
 }

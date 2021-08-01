@@ -108,12 +108,12 @@ public class GameCategoriesController {
             content = {@Content(mediaType = "application/json",
                 schema = @Schema(implementation = ErrorDto.class))})})
     @GetMapping("/check-version")
-    public ResponseEntity<?> getActive(@RequestParam @NotBlank LocalDateTime versionDate) {
+    public ResponseEntity<?> getActive(@RequestParam @NotBlank Long id) {
         try {
-            if (gameCategoriesService.checkCategoriesByDate(versionDate)) {
-                return ResponseEntity.ok("isActual: true");
+            if (gameCategoriesService.checkCategoriesByDate(id)) {
+                return ResponseEntity.ok("{\"isActual\": true}");
             }
-            return ResponseEntity.ok("isActual: false");
+            return ResponseEntity.ok("{\"isActual\": false}");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()

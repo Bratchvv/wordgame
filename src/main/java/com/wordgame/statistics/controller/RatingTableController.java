@@ -1,11 +1,6 @@
 package com.wordgame.statistics.controller;
 
-import com.wordgame.statistics.dto.EditableRatingTableDto;
-import com.wordgame.statistics.dto.ErrorDto;
-import com.wordgame.statistics.dto.InputParamsDto;
-import com.wordgame.statistics.dto.RatingPlayerListDataDto;
-import com.wordgame.statistics.dto.RatingTableDto;
-import com.wordgame.statistics.dto.RatingTopDto;
+import com.wordgame.statistics.dto.*;
 import com.wordgame.statistics.service.RatingTablesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -122,7 +117,7 @@ public class RatingTableController {
             content = {@Content(mediaType = "application/json",
                 schema = @Schema(implementation = ErrorDto.class))})})
     @PostMapping("/player")
-    public ResponseEntity<?> insertRatingData(@RequestBody InputParamsDto inputDto) {
+    public ResponseEntity<?> insertRatingData(@RequestBody InputPlayerRatingParamsDto inputDto) {
         try {
             return ResponseEntity.ok(ratingTablesService.insertDataToTable(inputDto.getName(),
                     inputDto.getPlayerId(), inputDto.getValue()));
@@ -190,10 +185,10 @@ public class RatingTableController {
             content = {@Content(mediaType = "application/json",
                 schema = @Schema(implementation = ErrorDto.class))})})
     @PostMapping("/table")
-    public ResponseEntity<?> createRatingTable(@RequestBody InputParamsDto inputDto) {
+    public ResponseEntity<?> createRatingTable(@RequestBody CreateRatingTableParamsDto inputDto) {
         try {
             return ResponseEntity.ok(
-                ratingTablesService.createRatingTable(inputDto.getName(), inputDto.getExpireDayCount())
+                ratingTablesService.createRatingTable(inputDto.getName(), inputDto.getExpireHoursCycle())
             );
         } catch (Exception e) {
             e.printStackTrace();

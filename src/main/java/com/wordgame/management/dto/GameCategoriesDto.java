@@ -3,15 +3,14 @@ package com.wordgame.management.dto;
 import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class GameCategoriesDto {
 
     private Long id;
-
-    private String name;
 
     private LocalDateTime date;
 

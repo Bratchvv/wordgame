@@ -61,7 +61,7 @@ public class PlayerCategoriesController {
                                           @RequestBody PlayerGameCategoriesData inputDto) {
         try {
             playerGameCategoriesService.saveData(id, inputDto);
-            return ResponseEntity.ok(id);
+            return ResponseEntity.ok("{\"id\" : " + id + "}");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()

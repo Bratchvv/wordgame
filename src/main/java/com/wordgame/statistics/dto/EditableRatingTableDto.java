@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EditableRatingTableDto {
     private String name;
-    private Integer expireDayCount;
+    private Integer expireHoursCycle;
     private boolean isNew;
 }

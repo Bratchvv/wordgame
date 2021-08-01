@@ -1,18 +1,18 @@
 package com.wordgame.statistics.dto;
 
-import java.time.LocalDate;
-import javax.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RatingTableDto {
+public class CreateRatingTableParamsDto {
+    @NotBlank
     private String name;
-    private Long initTimeUtc;
     private Integer expireHoursCycle;
 }

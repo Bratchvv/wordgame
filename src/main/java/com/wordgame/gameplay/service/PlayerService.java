@@ -35,9 +35,14 @@ public class PlayerService {
     }
 
     public AdvancedPlayerDto savePlayerData(AdvancedPlayerDto inputDto) {
-        Player player = gameplayModelMapper.map(inputDto, Player.class);
+        Player player = playerRepository.findById(inputDto.getId()).orElseThrow(EntityNotFoundException::new);
+        Player playerRequest = gameplayModelMapper.map(inputDto, Player.class);
+        player.setName(playerRequest.getName());
+        player.setUrlAvatar(playerRequest.getUrlAvatar());
         var millis = OffsetDateTime.now(ZoneOffset.UTC ).toInstant().toEpochMilli();
         player.getHealth().setTimeUTCSaving(millis);
+        player.getHealth().setSecondsRestoreLife(inputDto.getHealth().getSecondsRestoreLife());
+        player.getHealth().setLifes(inputDto.getHealth().getLifes());
         playerRepository.save(player);
         var res = gameplayModelMapper.map(player, AdvancedPlayerDto.class);
         res.getHealth().setTimeUTCNow(OffsetDateTime.now(ZoneOffset.UTC ).toInstant().toEpochMilli());

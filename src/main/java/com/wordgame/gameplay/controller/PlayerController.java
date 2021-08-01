@@ -31,12 +31,12 @@ public class PlayerController {
 
     @Operation(summary = "Get player data")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Get player data",
-            content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = AdvancedPlayerDto.class))}),
-        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
-            content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = ErrorDto.class))})})
+            @ApiResponse(responseCode = "200", description = "Get player data",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AdvancedPlayerDto.class))}),
+            @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorDto.class))})})
     @GetMapping("/{id}")
     public ResponseEntity<?> getPlayerData(@PathVariable String id) {
         try {
@@ -54,12 +54,12 @@ public class PlayerController {
 
     @Operation(summary = "Store new player")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "New player stored",
-            content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = PlayerDto.class))}),
-        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
-            content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = ErrorDto.class))})})
+            @ApiResponse(responseCode = "200", description = "New player stored",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = PlayerDto.class))}),
+            @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorDto.class))})})
     @PostMapping
     public ResponseEntity<?> createPlayer(@RequestBody PlayerDto inputDto) {
         try {
@@ -77,12 +77,12 @@ public class PlayerController {
 
     @Operation(summary = "Update player data")
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Player data updated",
-            content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = AdvancedPlayerDto.class))}),
-        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
-            content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = ErrorDto.class))})})
+            @ApiResponse(responseCode = "200", description = "Player data updated",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = AdvancedPlayerDto.class))}),
+            @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ErrorDto.class))})})
     @PutMapping
     public ResponseEntity<?> savePlayerData(@RequestBody AdvancedPlayerDto inputDto) {
         try {
