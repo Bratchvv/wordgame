@@ -1,5 +1,6 @@
 package com.wordgame.management.service;
 
+import com.wordgame.management.dto.GameCategoriesData;
 import com.wordgame.management.dto.GameCategoriesDto;
 import com.wordgame.management.entity.GameCategories;
 import com.wordgame.management.repository.GameCategoriesRepository;
@@ -20,11 +21,12 @@ public class GameCategoriesService {
     private final GameCategoriesRepository gameCategoriesRepository;
     private final ModelMapper modelMapper;
 
-    public GameCategoriesDto saveCategories(GameCategoriesDto categoriesDto) {
+    public GameCategoriesDto saveCategories(GameCategoriesData categories) {
        var currentActive = gameCategoriesRepository.getActiveGameCategories();
        currentActive.setActive(false);
        gameCategoriesRepository.save(currentActive);
-       var newActive = gameCategoriesRepository.save(modelMapper.map(categoriesDto, GameCategories.class));
+       var newActive = gameCategoriesRepository.save(modelMapper.map(categories,
+                                                                     GameCategories.class));
        return modelMapper.map(newActive, GameCategoriesDto.class);
     }
 

@@ -1,6 +1,7 @@
 package com.wordgame.management.dto;
 
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +15,7 @@ public class GameCategoriesDto {
 
     private LocalDateTime date;
 
+    @NotBlank
     private GameCategoriesData data;
 
     private boolean active;

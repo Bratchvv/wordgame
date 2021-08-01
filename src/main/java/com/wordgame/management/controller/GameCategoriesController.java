@@ -1,9 +1,16 @@
 package com.wordgame.management.controller;
 
+import com.wordgame.management.dto.GameCategoriesData;
 import com.wordgame.management.dto.GameCategoriesDto;
 import com.wordgame.management.service.GameCategoriesService;
 import com.wordgame.statistics.dto.ErrorDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -24,6 +31,14 @@ public class GameCategoriesController {
 
     private final GameCategoriesService gameCategoriesService;
 
+    @Operation(summary = "Get categories data")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Get categories data",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = GameCategoriesDto.class))}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
     @GetMapping("/{id}")
     public ResponseEntity<?> getCategories(@PathVariable Long id) {
         try {
@@ -38,10 +53,19 @@ public class GameCategoriesController {
         }
     }
 
+
+    @Operation(summary = "Save categories data")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Categories data saved",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = GameCategoriesDto.class))}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
     @PostMapping()
-    public ResponseEntity<?> save(@RequestBody GameCategoriesDto categoriesDto) {
+    public ResponseEntity<?> save(@RequestBody GameCategoriesData categories) {
         try {
-            return ResponseEntity.ok(gameCategoriesService.saveCategories(categoriesDto));
+            return ResponseEntity.ok(gameCategoriesService.saveCategories(categories));
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()
@@ -52,6 +76,14 @@ public class GameCategoriesController {
         }
     }
 
+    @Operation(summary = "Get rating tables list")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Get page",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = GameCategoriesDto.class))}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
     @GetMapping()
     public ResponseEntity<?> getTableRatingsData(Pageable pageable) {
         try {
@@ -66,8 +98,17 @@ public class GameCategoriesController {
         }
     }
 
+
+    @Operation(summary = "Check local categories version with active on server")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "isActual: true,"
+            + " when local version is same with sever, false, when different",
+            content = {@Content(mediaType = "application/json")}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
     @GetMapping("/check-version")
-    public ResponseEntity<?> getActive(@RequestParam LocalDateTime versionDate) {
+    public ResponseEntity<?> getActive(@RequestParam @NotBlank LocalDateTime versionDate) {
         try {
             if (gameCategoriesService.checkCategoriesByDate(versionDate)) {
                 return ResponseEntity.ok("isActual: true");
@@ -83,6 +124,14 @@ public class GameCategoriesController {
         }
     }
 
+    @Operation(summary = "Get current active categories file data")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Get active categories",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = GameCategoriesDto.class))}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
     @GetMapping("/active")
     public ResponseEntity<?> getActive() {
         try {

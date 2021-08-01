@@ -1,6 +1,7 @@
 package com.wordgame.gameplay.dto;
 
 import java.util.List;
+import javax.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,6 +12,7 @@ import lombok.Data;
 @Builder
 public class PlayerGameCategoriesData {
 
+    @NotBlank
     private List<Item> items;
 
     @Data

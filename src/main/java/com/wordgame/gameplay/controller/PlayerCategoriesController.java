@@ -3,6 +3,11 @@ package com.wordgame.gameplay.controller;
 import com.wordgame.gameplay.dto.ErrorDto;
 import com.wordgame.gameplay.dto.PlayerGameCategoriesData;
 import com.wordgame.gameplay.service.PlayerGameCategoriesService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,6 +26,14 @@ public class PlayerCategoriesController {
 
     private final PlayerGameCategoriesService playerGameCategoriesService;
 
+    @Operation(summary = "Get player categories data")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Get player categories data",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = PlayerGameCategoriesData.class))}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
     @GetMapping("/{id}")
     public ResponseEntity<?> getPlayerData(@PathVariable String id) {
         try {
@@ -35,6 +48,14 @@ public class PlayerCategoriesController {
         }
     }
 
+    @Operation(summary = "Store new player categories data")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "New player categories data stored",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = String.class))}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
     @PostMapping("/{id}")
     public ResponseEntity<?> createPlayer(@PathVariable String id,
                                           @RequestBody PlayerGameCategoriesData inputDto) {

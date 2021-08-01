@@ -1,6 +1,10 @@
 package com.wordgame.gameplay.dto;
 
-import lombok.*;
+import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
@@ -8,8 +12,13 @@ import lombok.*;
 @AllArgsConstructor
 public class PlayerDto {
 
+    @NotBlank
     private String id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String urlAvatar;
 
 }

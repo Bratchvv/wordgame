@@ -1,7 +1,13 @@
 package com.wordgame.management.controller;
 
+import com.wordgame.management.dto.GameWordsInfoDto;
 import com.wordgame.management.service.GameWordsService;
 import com.wordgame.statistics.dto.ErrorDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -18,8 +24,16 @@ public class GameWordsController {
 
     private final GameWordsService gameWordsService;
 
+    @Operation(summary = "Get words files page")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Get words files list",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = GameWordsInfoDto.class))}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
     @GetMapping()
-    public ResponseEntity<?> getTableRatingsData(Pageable pageable) {
+    public ResponseEntity<?> getWordsPage(Pageable pageable) {
         try {
             return ResponseEntity.ok(gameWordsService.getPages(pageable));
         } catch (Exception e) {
@@ -32,6 +46,15 @@ public class GameWordsController {
         }
     }
 
+
+    @Operation(summary = "Get current active words file data")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Get active words",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = GameWordsInfoDto.class))}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
     @GetMapping("/active")
     public ResponseEntity<?> getActive() {
         try {
