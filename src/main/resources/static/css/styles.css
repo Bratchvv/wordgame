@@ -125,6 +125,36 @@
   margin: 0;
 }
 
+.sorted-desc::after, .sorted-asc::after {
+  float: right;
+}
+
+.sorted-desc::after{
+  content:"\25BC";
+}
+
+.sorted-asc::after{
+  content: "\25B2";
+}
+
+.page-select > select {
+    height: 35px;
+    width: 50px;
+    border-color: #efefef;
+    border-radius: 4px;
+  }
+
+.page-size-selector {
+  height: 35px;
+  width: 50px;
+  border-color: #efefef;
+  border-radius: 4px;
+}
+
+.filter-pane__title {
+  padding: 4px;
+}
+
 .action-button {
   padding: 8px;
   font-size: 16px;
@@ -382,7 +412,7 @@
 table.flex-table {
   display: flex;
   flex-direction: column;
-  /*height: 100%;*/
+  height: 100%;
 }
 
 table.flex-table thead,

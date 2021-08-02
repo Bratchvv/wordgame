@@ -58,4 +58,25 @@ public class GameWordsService {
         GameWords words = gameWordsRepository.save(modelMapper.map(dto, GameWords.class));
         inMemDictionaryService.fullUpdateFromEntity(words);
     }
+
+    @Transactional
+    public void activateWords(Long id) {
+        GameWords activeInfo = gameWordsRepository.findByActive( true);
+        if(activeInfo != null) {
+            activeInfo.setActive(false);
+            gameWordsRepository.save(activeInfo);
+            GameWords newActiveInfo = gameWordsRepository.findById(id).orElseThrow(() -> {
+                activeInfo.setActive(true);
+                gameWordsRepository.save(activeInfo);
+                throw new RuntimeException("Не удалось сделать словарь активным. Выполнен откат");
+            });
+            if(newActiveInfo != null) {
+                newActiveInfo.setActive(true);
+                gameWordsRepository.save(newActiveInfo);
+                inMemDictionaryService.fullUpdateFromEntity(newActiveInfo);
+            }
+        } else {
+            throw new RuntimeException("Не удалось найти активный словарь");
+        }
+    }
 }

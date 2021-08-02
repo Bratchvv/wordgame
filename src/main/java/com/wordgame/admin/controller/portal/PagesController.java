@@ -24,14 +24,4 @@ public class PagesController {
 
         return "/management/rating";
     }
-
-    @RequestMapping(value = { "/management/backup" }, method = RequestMethod.GET)
-    public String backup(Model model, Principal principal) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-
-        return "/management/backup";
-    }
-
-
 }

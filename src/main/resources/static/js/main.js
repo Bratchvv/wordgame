@@ -37,8 +37,8 @@ $(document).ready(function() {
     const data = $(this).attr('data-xml');
     copyToClipboard(data)
     swal({
-           title:  'Просмотр XML (Данные уже скопированы в буфер обмена!) ',
-           text: formatXml(data),
+           title:  'Просмотр (Данные уже скопированы в буфер обмена!) ',
+           text: data,
            type: 'info',
            html: true,
            showCancelButton: true,
@@ -78,4 +78,3 @@ function showSnackPopup(message, key)
     }
   }
 }
-

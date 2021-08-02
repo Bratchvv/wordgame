@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sd="http://www.thymeleaf.org/spring-data"
+      layout:decorate="~{fragments/workspace}">
+<head>
+    <title>WordGame Management Backup</title>
+</head>
+<body>
+<div layout:fragment="content" class="container">
+
+    <div class="filter-pane">
+        <form th:action="@{/management/backup-words}" th:object="${filterForm}" method="get">
+            <h5 class="filter-pane__title">Фильтр</h5>
+            <div class="filter-items">
+                <input placeholder="Имя" id="snils-search" type="text" th:field="*{name}"
+                       class="form-control inline item"/>
+                <input placeholder="ID" id="id-search" type="text" th:field="*{id}" class="form-control inline item"/>
+                <button class="action-button action-button--main" style="margin: 8px;">
+                    Найти <i class="material-icons" style="color: white">search</i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="page-table">
+        <table class="table-striped table-hover main-table table table-striped flex-table">
+            <thead>
+            <tr>
+                <th> <a class="sorted" sd:pagination-sort="id">ID</a></th>
+                <th><a class="sorted" sd:pagination-sort="name">Имя</a></th>
+                <th><a class="sorted" sd:pagination-sort="date">Дата</a></th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row,i : ${page}">
+                <td scope="row" th:text="${row.getId()}">Id</td>
+                <td th:text="${row.getName()}">Name</td>
+                <td th:text="${row.getDate()}">Date</td>
+                <td>
+                    <form th:if="${not row.active}" action="#"
+                          th:action="@{'/management/backup-words/activate/{id}'(id=${row.getId()})}"
+                          th:method="post">
+                        <button type="submit" class="btn">
+                            Активировать
+                        </button>
+                    </form>
+                    <h4 th:if="${row.active}" >Активно</h4>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="paginator">
+            <div class="col-sm-6">
+                <div sd:pagination-summary="">info</div>
+            </div>
+            <div class="col-sm-6">
+                <nav class="pull-right" style="display: flex;align-items: center;">
+                    <div class="page-select" style="padding-right: 16px;" sd:page-size-selector="javascript"></div>
+                    <ul class="pagination" sd:pagination-split="10" sd:pagination="full">
+                        <li class="disabled"><a href="#" aria-label="Previous"><span
+                                aria-hidden="true">&laquo;</span></a></li>
+                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

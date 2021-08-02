@@ -57,6 +57,7 @@ public class InMemDictionaryService {
     }
 
     public void fullUpdate(List<String> words) {
+        log.info("Динамическое обновление словаря");
         inMemWordDictionary.clear();
         inMemWordDictionary.addAll(words);
         inMemReadFileWord = new ReadFileWord(words);
