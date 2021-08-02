@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RatingDataListRepository extends PagingAndSortingRepository<RatingTableData, String> {
+public interface RatingDataListRepository extends PagingAndSortingRepository<RatingTableData, Long> {
 
     Page<RatingTableData> findAllByName(String name, Pageable pageable);
     Page<RatingTableData> findAllByPlayer_Id(String playerId, Pageable pageable);

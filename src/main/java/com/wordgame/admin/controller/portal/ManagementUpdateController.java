@@ -32,7 +32,7 @@ public class ManagementUpdateController {
     private final GameWordsService gameWordsService;
 
 
-    @RequestMapping(value = { "/management/properties" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/","/management/properties" }, method = RequestMethod.GET)
     public String properties(Model model, Principal principal) {
         model.addAttribute("propertiesData",
                 new PropertiesForm(generationPropertiesService.getList(),

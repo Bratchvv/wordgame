@@ -17,11 +17,4 @@ public class PagesController {
 
     private final GenerationPropertiesService generationPropertiesService;
 
-    @RequestMapping(value = { "/","/management/rating" }, method = RequestMethod.GET)
-    public String rating(Model model, Principal principal) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-
-        return "/management/rating";
-    }
 }

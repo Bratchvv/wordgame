@@ -123,4 +123,12 @@ public class RatingTablesService {
     public void clearRating(Long id) {
         ratingTableDataRepository.deleteAllByRatingTable_Id(id);
     }
+
+    @Transactional
+    public void updateHours(Long id, Integer hours) {
+        var table = ratingTableRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+        table.setExpireHoursCycle(hours);
+        table.setInitTimeUtc(OffsetDateTime.now(ZoneOffset.UTC ).toInstant().toEpochMilli());
+        ratingTableRepository.save(table);
+    }
 }

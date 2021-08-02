@@ -44,7 +44,7 @@ public class HttpInterceptor implements HandlerInterceptor {
         if (nonNull(modelAndView)) {
             modelAndView.addObject("pagesList", Lists.newArrayList(
                     new PageInfo("", ""),
-                    new PageInfo("Таблица Рейтинов", "/management/rating"),
+                    new PageInfo("Таблица Рейтинов", "/statistics/rating"),
                     new PageInfo("Параметры", "/management/properties"),
                     new PageInfo("Таблица Словарей", "/management/backup-words"),
                     new PageInfo("Таблица Категорий", "/management/backup-categories")
