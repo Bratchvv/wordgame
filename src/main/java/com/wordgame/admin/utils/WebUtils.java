@@ -1,19 +1,18 @@
 package com.wordgame.admin.utils;
 
+import java.util.Collection;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import java.util.Collection;
-
-@NoArgsConstructor(access = AccessLevel.PRIVATE) // приватный конструктор для класса-утилиты
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class WebUtils {
 
     /**
      * Метод утилита, для текстового описания ролей пользователя.
      *
-     * @param user  пользователь из контекста Spring
+     * @param user пользователь из контекста Spring
      * @return текстовое описания пользователя
      */
     public static String toString(User user) {

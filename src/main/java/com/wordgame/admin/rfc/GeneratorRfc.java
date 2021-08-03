@@ -1,24 +1,22 @@
 package com.wordgame.admin.rfc;
 
-import com.wordgame.generator.service.GeneratorService;
-import com.wordgame.generator.service.InMemDictionaryService;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Service;
+import static java.lang.Thread.sleep;
 
-import javax.annotation.PostConstruct;
+import com.wordgame.generator.service.GeneratorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static java.lang.Thread.sleep;
+import javax.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Service;
 
 /**
+ * Специальный сервис для стрес теста, БЕЗ БУФЕРА, включается параметром rfc.raw.generator=true,
+ * кол-во итераций - rfc.raw.count=999
+ *
  * @author Vladimir Bratchikov
  */
 @RequiredArgsConstructor
@@ -27,17 +25,15 @@ import static java.lang.Thread.sleep;
 @Order(3)
 public class GeneratorRfc {
 
+    private final GeneratorService generatorService;
     @Value("${rfc.raw.generator}")
     private boolean rfcEnabled;
-
     @Value("${rfc.raw.count}")
     private int count;
 
-    private final GeneratorService generatorService;
-
     @PostConstruct
     public void afterInit() {
-        if(rfcEnabled) {
+        if (rfcEnabled) {
             log.info("Run rfc test for raw generation ");
             AtomicLong timeSum = new AtomicLong(0);
             AtomicLong countSum = new AtomicLong(0);
@@ -48,14 +44,14 @@ public class GeneratorRfc {
                     generatorService.generateWordSequence();
                     timeSum.addAndGet(System.currentTimeMillis() - time);
                     countSum.incrementAndGet();
-                    log.info("Avg time: {} ms, count: {}", timeSum.get()/countSum.get(), countSum.get());
+                    log.info("Avg time: {} ms, count: {}", timeSum.get() / countSum.get(), countSum.get());
                     try {
                         sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 });
-           }
+            }
             executor.shutdown();
         }
     }

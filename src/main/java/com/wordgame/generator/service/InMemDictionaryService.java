@@ -1,16 +1,8 @@
 package com.wordgame.generator.service;
 
-import com.google.common.collect.Lists;
 import com.wordgame.generator.algorithm.ReadFileWord;
 import com.wordgame.management.entity.GameWords;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.PostConstruct;
+import com.wordgame.management.repository.GameWordsRepository;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,6 +11,13 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Stream;
+import javax.annotation.PostConstruct;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Vladimir Bratchikov
@@ -30,17 +29,19 @@ import java.util.stream.Stream;
 @Order(1)
 public class InMemDictionaryService {
 
+    private final List<String> inMemWordDictionary = new ArrayList<>();
+    private final GameWordsRepository gameWordsRepository;
+
     @Value("${dictionary.source}")
     private String dictionaryFilePath;
 
-    private final List<String> inMemWordDictionary = new ArrayList<>();
     private ReadFileWord inMemReadFileWord = null;
 
     @PostConstruct
     public void afterInit() {
         log.info("Запуск механизма загрузки словаря, при инициализации приложения");
         var time = System.currentTimeMillis();
-        fullUpdateFromFile();
+        fullUpdateFromEntity(gameWordsRepository.findByActive(true));
         log.info("Словарь успешно загружен. Размер словаря: {}. Время загрузки: {}мс",
                 getInMemWordDictionary().size(),
                 (System.currentTimeMillis() - time));
@@ -66,7 +67,7 @@ public class InMemDictionaryService {
     public void fullUpdateFromFile() {
         List<String> words = new LinkedList<>();
         try (Stream<String> lines = Files.lines(
-                Paths.get(dictionaryFilePath), Charset.defaultCharset())) {
+            Paths.get(dictionaryFilePath), Charset.defaultCharset())) {
             lines.forEachOrdered(words::add);
         } catch (Exception e) {
 
@@ -78,7 +79,7 @@ public class InMemDictionaryService {
 
     public void fullUpdateFromEntity(GameWords gameWords) {
         List<String> words = new LinkedList<>(Arrays.asList(
-                gameWords.getData().replaceAll("\r","").split("\n")));
+            gameWords.getData().replaceAll("\r", "").split("\n")));
         fullUpdate(words);
     }
 }

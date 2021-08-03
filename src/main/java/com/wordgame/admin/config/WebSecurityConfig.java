@@ -25,8 +25,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * Бин глобальных настроек Spring Security
+     *
      * @param auth - билдер для установки параметров AuthenticationManager
-     * @throws Exception
      */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -39,7 +39,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * Настройки безопастности.
      *
      * @param http контекст
-     * @throws Exception
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {

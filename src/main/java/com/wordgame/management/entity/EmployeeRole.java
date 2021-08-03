@@ -1,15 +1,25 @@
 package com.wordgame.management.entity;
 
 
-import lombok.*;
+import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
-import javax.persistence.*;
-import java.util.Objects;
-
 /**
- * Роли с привязками к пользователям.
- * Т е пересечения пользователь -> его список ролей
+ * Роли с привязками к пользователям. Т е пересечения пользователь -> его список ролей
  */
 @Getter
 @Setter
@@ -37,8 +47,12 @@ public class EmployeeRole {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
+            return false;
+        }
         EmployeeRole that = (EmployeeRole) o;
 
         return Objects.equals(id, that.id);

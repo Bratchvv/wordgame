@@ -3,11 +3,9 @@ package com.wordgame.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wordgame.gameplay.dto.PlayerGameCategoriesData;
-import com.wordgame.management.dto.GameCategoriesData;
-import lombok.SneakyThrows;
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
+import lombok.SneakyThrows;
 
 /**
  * @author Vladimir Bratchikov

@@ -3,7 +3,6 @@ package com.wordgame.gameplay.dto;
 import java.io.Serializable;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,20 +18,23 @@ public class PlayerGameCategoriesData implements Serializable {
 
     @Data
     @NoArgsConstructor
-    public static class Item  implements Serializable {
+    public static class Item implements Serializable {
+
         private String nameCategory;
         private List<Level> levels;
     }
 
     @Data
     @NoArgsConstructor
-    public static class Level  implements Serializable {
-       private List<Card> cards;
+    public static class Level implements Serializable {
+
+        private List<Card> cards;
     }
 
     @Data
     @NoArgsConstructor
     public static class Card implements Serializable {
+
         private String nameCard;
         private Integer countWords;
         private List<String> words;

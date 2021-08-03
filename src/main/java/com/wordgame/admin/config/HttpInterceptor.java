@@ -1,19 +1,18 @@
 package com.wordgame.admin.config;
 
+import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
+
 import com.google.common.collect.Lists;
 import com.wordgame.admin.model.PageInfo;
+import java.util.Arrays;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-
-import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 
 /**
  * Конфиг для перехватчика http
@@ -43,11 +42,11 @@ public class HttpInterceptor implements HandlerInterceptor {
         String selectedPage = selectedPage(request, response);
         if (nonNull(modelAndView)) {
             modelAndView.addObject("pagesList", Lists.newArrayList(
-                    new PageInfo("", ""),
-                    new PageInfo("Таблица Рейтинов", "/statistics/rating"),
-                    new PageInfo("Параметры", "/management/properties"),
-                    new PageInfo("Таблица Словарей", "/management/backup-words"),
-                    new PageInfo("Таблица Категорий", "/management/backup-categories")
+                new PageInfo("", ""),
+                new PageInfo("Таблица Рейтинов", "/statistics/rating"),
+                new PageInfo("Параметры", "/management/properties"),
+                new PageInfo("Таблица Словарей", "/management/backup-words"),
+                new PageInfo("Таблица Категорий", "/management/backup-categories")
             ));
             modelAndView.addObject("selectedPage", selectedPage);
         }

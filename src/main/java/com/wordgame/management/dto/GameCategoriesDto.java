@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor

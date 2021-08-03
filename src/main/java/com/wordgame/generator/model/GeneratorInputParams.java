@@ -1,10 +1,9 @@
 package com.wordgame.generator.model;
 
 import com.wordgame.generator.algorithm.ReadFileWord;
+import java.util.List;
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @Builder

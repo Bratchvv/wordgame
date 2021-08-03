@@ -41,10 +41,10 @@ public class PlayerCategoriesController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()
-                    .name(e.getClass().getName())
-                    .details(e.getMessage())
-                    .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                                            .name(e.getClass().getName())
+                                            .details(e.getMessage())
+                                            .build(),
+                                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -65,10 +65,10 @@ public class PlayerCategoriesController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()
-                    .name(e.getClass().getName())
-                    .details(e.getMessage())
-                    .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                                            .name(e.getClass().getName())
+                                            .details(e.getMessage())
+                                            .build(),
+                                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

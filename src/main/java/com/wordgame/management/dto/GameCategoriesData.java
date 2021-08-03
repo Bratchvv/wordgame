@@ -2,7 +2,6 @@ package com.wordgame.management.dto;
 
 import java.io.Serializable;
 import java.util.List;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +16,8 @@ public class GameCategoriesData implements Serializable {
 
     @Data
     @NoArgsConstructor
-    public static class Item implements Serializable  {
+    public static class Item implements Serializable {
+
         private String nameCategory;
         private String urlImage;
         private List<Level> levels;
@@ -25,15 +25,17 @@ public class GameCategoriesData implements Serializable {
 
     @Data
     @NoArgsConstructor
-    public static class Level implements Serializable  {
-       private List<Card> cards;
+    public static class Level implements Serializable {
+
+        private List<Card> cards;
     }
 
     @Data
     @NoArgsConstructor
-    public static class Card  implements Serializable {
+    public static class Card implements Serializable {
+
         private String nameCard;
         private Integer countWords;
-       private List<String> words;
+        private List<String> words;
     }
 }

@@ -1,20 +1,22 @@
 package com.wordgame.admin.rfc;
 
+import static java.lang.Thread.sleep;
+
 import com.wordgame.generator.service.InMemWordsBufferService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.atomic.AtomicLong;
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.atomic.AtomicLong;
-
-import static java.lang.Thread.sleep;
-
 /**
+ * Специальный сервис для стрес теста, С БУФЕРОМ, включается параметром rfc.buffered.generator=true,
+ * кол-во итераций - rfc.buffered.count=999
+ *
  * @author Vladimir Bratchikov
  */
 @RequiredArgsConstructor
@@ -23,17 +25,15 @@ import static java.lang.Thread.sleep;
 @Order(3)
 public class GeneratorRfcWithBuffer {
 
+    private final InMemWordsBufferService inMemWordsBufferService;
     @Value("${rfc.buffered.generator}")
     private boolean rfcEnabled;
-
     @Value("${rfc.buffered.count}")
     private int count;
 
-    private final InMemWordsBufferService inMemWordsBufferService;
-
     @PostConstruct
     public void afterInit() {
-        if(rfcEnabled) {
+        if (rfcEnabled) {
             log.info("Run rfc test for buffered generation");
             AtomicLong timeSum = new AtomicLong(0);
             AtomicLong countSum = new AtomicLong(0);
@@ -44,7 +44,7 @@ public class GeneratorRfcWithBuffer {
                     inMemWordsBufferService.getFromBuffer();
                     timeSum.addAndGet(System.currentTimeMillis() - time);
                     countSum.incrementAndGet();
-                    log.info("Avg time: {} ms, count: {}", timeSum.get()/countSum.get(), countSum.get());
+                    log.info("Avg time: {} ms, count: {}", timeSum.get() / countSum.get(), countSum.get());
                     try {
                         sleep(200);
                     } catch (InterruptedException e) {
@@ -52,7 +52,7 @@ public class GeneratorRfcWithBuffer {
                     }
                 });
 
-           }
+            }
             executor.shutdown();
         }
     }

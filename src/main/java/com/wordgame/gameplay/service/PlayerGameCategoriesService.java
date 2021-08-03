@@ -25,13 +25,13 @@ public class PlayerGameCategoriesService {
 
     public void saveData(String id, PlayerGameCategoriesData data) {
         PlayerGameCategories current = playerGameCategoriesRepository.findFirstByPlayer_Id(id);
-        if(current == null) {
+        if (current == null) {
             current = new PlayerGameCategories();
             current.setData(data);
             current.setPlayer(
                 playerRepository.findById(id)
                     .orElseThrow(() -> new EntityNotFoundException(
-                                      "Игрок не найден. ID=" + id)));
+                        "Игрок не найден. ID=" + id)));
             current.setDate(LocalDateTime.now());
             playerGameCategoriesRepository.save(current);
         } else {

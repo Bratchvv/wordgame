@@ -21,7 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 /**
- * Основной контроллер для страниц.
+ * Контроллер для работы с параметрами
+ *
+ * @author vbratchikov
  */
 @Controller
 @RequiredArgsConstructor
@@ -32,17 +34,17 @@ public class ManagementUpdateController {
     private final GameWordsService gameWordsService;
 
 
-    @RequestMapping(value = { "/","/management/properties" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/management/properties"}, method = RequestMethod.GET)
     public String properties(Model model, Principal principal) {
         model.addAttribute("propertiesData",
-                new PropertiesForm(generationPropertiesService.getList(),
-                                   gameWordsService.getActiveWords()));
+                           new PropertiesForm(generationPropertiesService.getList(),
+                                              gameWordsService.getActiveWords()));
         return "/management/properties";
     }
 
-    @RequestMapping(value="/management/properties/update",method=RequestMethod.POST)
+    @RequestMapping(value = "/management/properties/update", method = RequestMethod.POST)
     public RedirectView updateProperty(@ModelAttribute("propertiesData") PropertiesForm propertiesForm,
-                            BindingResult result, RedirectAttributes redir) {
+                                       BindingResult result, RedirectAttributes redir) {
         RedirectView redirectView = new RedirectView("/management/properties", true);
         if (result.hasErrors()) {
             redir.addFlashAttribute("globalErrorMessage", "Ошибка при сохранении");
@@ -50,7 +52,7 @@ public class ManagementUpdateController {
         }
         try {
             propertiesForm.getProperties()
-                    .forEach(property -> generationPropertiesService.updateParam(property.getName(), property.getValue()));
+                .forEach(property -> generationPropertiesService.updateParam(property.getName(), property.getValue()));
             redir.addFlashAttribute("properties", generationPropertiesService.getList());
         } catch (Exception e) {
             e.printStackTrace();

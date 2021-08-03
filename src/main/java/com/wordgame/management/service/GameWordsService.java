@@ -29,9 +29,9 @@ public class GameWordsService {
 
     public List<GameWordsInfoDto> getList() {
         return gameWordsRepository.findAllInfo().stream()
-                .map(p -> modelMapper.map(p, GameWordsInfoDto.class))
-                .sorted(Comparator.comparing(GameWordsInfoDto::getId))
-                .collect(Collectors.toList());
+            .map(p -> modelMapper.map(p, GameWordsInfoDto.class))
+            .sorted(Comparator.comparing(GameWordsInfoDto::getId))
+            .collect(Collectors.toList());
     }
 
     public Page<GameWordsInfoDto> getPages(Pageable pageable) {
@@ -45,8 +45,8 @@ public class GameWordsService {
 
     @Transactional
     public void addNewWords(String name, String data) {
-        GameWords activeInfo = gameWordsRepository.findByActive( true);
-        if(activeInfo != null) {
+        GameWords activeInfo = gameWordsRepository.findByActive(true);
+        if (activeInfo != null) {
             activeInfo.setActive(false);
             gameWordsRepository.save(activeInfo);
         }
@@ -61,8 +61,8 @@ public class GameWordsService {
 
     @Transactional
     public void activateWords(Long id) {
-        GameWords activeInfo = gameWordsRepository.findByActive( true);
-        if(activeInfo != null) {
+        GameWords activeInfo = gameWordsRepository.findByActive(true);
+        if (activeInfo != null) {
             activeInfo.setActive(false);
             gameWordsRepository.save(activeInfo);
             GameWords newActiveInfo = gameWordsRepository.findById(id).orElseThrow(() -> {
@@ -70,7 +70,7 @@ public class GameWordsService {
                 gameWordsRepository.save(activeInfo);
                 throw new RuntimeException("Не удалось сделать словарь активным. Выполнен откат");
             });
-            if(newActiveInfo != null) {
+            if (newActiveInfo != null) {
                 newActiveInfo.setActive(true);
                 gameWordsRepository.save(newActiveInfo);
                 inMemDictionaryService.fullUpdateFromEntity(newActiveInfo);

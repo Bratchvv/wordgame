@@ -3,17 +3,15 @@ package com.wordgame.management.service;
 import com.wordgame.management.dto.GamePropertyDto;
 import com.wordgame.management.entity.GameProperty;
 import com.wordgame.management.repository.GamePropertyRepository;
-
-import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Vladimir Bratchikov
@@ -54,21 +52,21 @@ public class GenerationPropertiesService {
     }
 
     public int getParam(String param) {
-        if(INNER_GENERATION_PARAMS_BUFFER.get(param) != null) {
+        if (INNER_GENERATION_PARAMS_BUFFER.get(param) != null) {
             return INNER_GENERATION_PARAMS_BUFFER.get(param);
         }
         GameProperty property = gamePropertyRepository.findByName(param)
-                .orElseThrow(EntityNotFoundException::new);
+            .orElseThrow(EntityNotFoundException::new);
         INNER_GENERATION_PARAMS_BUFFER.put(param, Integer.parseInt(property.getValue()));
         return INNER_GENERATION_PARAMS_BUFFER.get(param);
     }
 
     public GamePropertyDto updateParam(String param, String value) {
-        if(INNER_GENERATION_PARAMS_BUFFER.get(param) != null) {
+        if (INNER_GENERATION_PARAMS_BUFFER.get(param) != null) {
             INNER_GENERATION_PARAMS_BUFFER.remove(param);
         }
         GameProperty property = gamePropertyRepository.findByName(param)
-                .orElseThrow(EntityNotFoundException::new);
+            .orElseThrow(EntityNotFoundException::new);
         property.setValue(value);
         gamePropertyRepository.save(property);
         return modelMapper.map(property, GamePropertyDto.class);
@@ -76,8 +74,8 @@ public class GenerationPropertiesService {
 
     public List<GamePropertyDto> getList() {
         return gamePropertyRepository.findAll().stream()
-                .map(p -> modelMapper.map(p, GamePropertyDto.class))
-                .sorted(Comparator.comparing(GamePropertyDto::getId))
-                .collect(Collectors.toList());
+            .map(p -> modelMapper.map(p, GamePropertyDto.class))
+            .sorted(Comparator.comparing(GamePropertyDto::getId))
+            .collect(Collectors.toList());
     }
 }

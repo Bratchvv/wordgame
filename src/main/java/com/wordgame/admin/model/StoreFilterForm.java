@@ -2,6 +2,9 @@ package com.wordgame.admin.model;
 
 import lombok.Data;
 
+/**
+ * @author Vladimir Bratchikov
+ */
 @Data
 public class StoreFilterForm {
 

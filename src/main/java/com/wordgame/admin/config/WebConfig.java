@@ -1,6 +1,5 @@
 package com.wordgame.admin.config;
 
-import com.wordgame.management.service.EmployeeDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +9,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration // Обьявляем конфиг бин, для описания других, кастомных бинов.
 @AllArgsConstructor
-public class WebConfig  implements WebMvcConfigurer {
+public class WebConfig implements WebMvcConfigurer {
 
     @Bean
     public ClassLoaderTemplateResolver yourTemplateResolver() {

@@ -21,7 +21,6 @@ public class WordgameApplication {
         SpringApplication.run(WordgameApplication.class, args);
     }
 
-
     @EventListener(ApplicationReadyEvent.class)
     public void afterInit() {
         log.info("LOAD WORDGAME SERVER APP V - {}", "1.0");

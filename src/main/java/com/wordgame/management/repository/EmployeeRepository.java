@@ -1,12 +1,11 @@
 package com.wordgame.management.repository;
 
 import com.wordgame.management.entity.Employee;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Repository
 @Transactional

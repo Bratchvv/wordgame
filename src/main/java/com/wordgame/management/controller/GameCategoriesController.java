@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import java.time.LocalDateTime;
 import javax.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -46,10 +45,10 @@ public class GameCategoriesController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()
-                    .name(e.getClass().getName())
-                    .details(e.getMessage())
-                    .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                                            .name(e.getClass().getName())
+                                            .details(e.getMessage())
+                                            .build(),
+                                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -69,10 +68,10 @@ public class GameCategoriesController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()
-                    .name(e.getClass().getName())
-                    .details(e.getMessage())
-                    .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                                            .name(e.getClass().getName())
+                                            .details(e.getMessage())
+                                            .build(),
+                                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -91,10 +90,10 @@ public class GameCategoriesController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()
-                    .name(e.getClass().getName())
-                    .details(e.getMessage())
-                    .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                                            .name(e.getClass().getName())
+                                            .details(e.getMessage())
+                                            .build(),
+                                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -117,10 +116,10 @@ public class GameCategoriesController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()
-                    .name(e.getClass().getName())
-                    .details(e.getMessage())
-                    .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                                            .name(e.getClass().getName())
+                                            .details(e.getMessage())
+                                            .build(),
+                                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -139,10 +138,10 @@ public class GameCategoriesController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()
-                    .name(e.getClass().getName())
-                    .details(e.getMessage())
-                    .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+                                            .name(e.getClass().getName())
+                                            .details(e.getMessage())
+                                            .build(),
+                                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

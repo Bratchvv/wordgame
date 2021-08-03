@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Контроллер для страниц авторизации
+ *
+ * @author vbratchikov
  */
 @Controller
 public class AuthController {

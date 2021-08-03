@@ -4,6 +4,8 @@ package com.wordgame.management.service;
 import com.wordgame.management.entity.Employee;
 import com.wordgame.management.repository.EmployeeRepository;
 import com.wordgame.management.repository.EmployeeRoleRepository;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,13 +14,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * Собственный сервис который переопределяет базовые спринговые методы по авторизации.
- * Такой подход нужен для использования общего механизма spring security,
- * но с учетом нашей инфраструктуры БД, особенностей наших юзеров и т д.
+ * Собственный сервис который переопределяет базовые спринговые методы по авторизации. Такой подход нужен для
+ * использования общего механизма spring security, но с учетом нашей инфраструктуры БД, особенностей наших юзеров и т
+ * д.
  */
 @Service
 @AllArgsConstructor
@@ -55,7 +54,7 @@ public class EmployeeDetailsServiceImpl implements UserDetailsService {
         }
 
         UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-                employee.getLogin(),employee.getPassword(), grantList);
+            employee.getLogin(), employee.getPassword(), grantList);
 
         return userDetails;
     }

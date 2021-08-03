@@ -1,20 +1,16 @@
 package com.wordgame.admin.model;
 
+import static java.util.Objects.nonNull;
+
 import com.wordgame.management.entity.GameCategories;
 import com.wordgame.management.entity.GameCategories_;
-import com.wordgame.management.entity.GameWords;
-import com.wordgame.management.entity.GameWords_;
-import org.springframework.stereotype.Component;
-
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.util.Objects.nonNull;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Vladimir Bratchikov

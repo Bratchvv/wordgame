@@ -1,6 +1,5 @@
 package com.wordgame.gameplay.entity;
 
-import com.wordgame.core.ToGameCategoriesDataJsonConverter;
 import com.wordgame.core.ToPlayerGameCategoriesDataJsonConverter;
 import com.wordgame.gameplay.dto.PlayerGameCategoriesData;
 import java.time.LocalDateTime;

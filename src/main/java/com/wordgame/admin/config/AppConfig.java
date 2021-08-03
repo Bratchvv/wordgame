@@ -34,7 +34,7 @@ public class AppConfig {
     }
 
     @Bean
-    public RequestContextListener requestContextListener(){
+    public RequestContextListener requestContextListener() {
         return new RequestContextListener();
     }
 

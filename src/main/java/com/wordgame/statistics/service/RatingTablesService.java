@@ -41,13 +41,13 @@ public class RatingTablesService {
     public EditableRatingTableDto createRatingTable(String name, Integer expireHoursCycle) {
         var ratingTable = ratingTableRepository.findFirstByName(name);
         var isNew = false;
-        if(ratingTable == null) {
+        if (ratingTable == null) {
             ratingTable = new RatingTable();
             ratingTable.setName(name);
             isNew = true;
         }
         ratingTable.setExpireHoursCycle(expireHoursCycle);
-        ratingTable.setInitTimeUtc(OffsetDateTime.now(ZoneOffset.UTC ).toInstant().toEpochMilli());
+        ratingTable.setInitTimeUtc(OffsetDateTime.now(ZoneOffset.UTC).toInstant().toEpochMilli());
         ratingTableRepository.save(ratingTable);
         var dto = statisticsModelMapper.map(ratingTable, EditableRatingTableDto.class);
         dto.setNew(isNew);
@@ -58,7 +58,7 @@ public class RatingTablesService {
         var ratingTableData = ratingTableDataRepository
             .findFirstByNameAndPlayer_Id(name, playerId);
         var isNew = false;
-        if(ratingTableData == null) {
+        if (ratingTableData == null) {
             var ratingTable = ratingTableRepository.findFirstByName(name);
             ratingTableData = new RatingTableData();
             ratingTableData.setName(ratingTable.getName());
@@ -112,8 +112,8 @@ public class RatingTablesService {
         ratingTableRepository.findAll().forEach(ratingTable -> {
             var cycle = ratingTable.getExpireHoursCycle();
             var startTime = ratingTable.getInitTimeUtc();
-            var millis = OffsetDateTime.now(ZoneOffset.UTC ).toInstant().toEpochMilli();
-            if(millis >= (startTime+ cycle*60*60*1000)) {
+            var millis = OffsetDateTime.now(ZoneOffset.UTC).toInstant().toEpochMilli();
+            if (millis >= (startTime + cycle * 60 * 60 * 1000)) {
                 clearRating(ratingTable.getId());
             }
         });
@@ -128,7 +128,7 @@ public class RatingTablesService {
     public void updateHours(Long id, Integer hours) {
         var table = ratingTableRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         table.setExpireHoursCycle(hours);
-        table.setInitTimeUtc(OffsetDateTime.now(ZoneOffset.UTC ).toInstant().toEpochMilli());
+        table.setInitTimeUtc(OffsetDateTime.now(ZoneOffset.UTC).toInstant().toEpochMilli());
         ratingTableRepository.save(table);
     }
 }

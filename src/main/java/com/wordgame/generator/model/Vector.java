@@ -2,7 +2,6 @@ package com.wordgame.generator.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 /**
  * @author Vladimir Bratchikov

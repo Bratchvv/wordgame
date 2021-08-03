@@ -23,26 +23,24 @@ public class CommonDatabaseCreator {
     public void createDatabase() {
         String databaseUrl = getDatabaseUrl();
         String databaseName = getDatabaseName();
-        try(Connection connection = DriverManager.getConnection(databaseUrl, username, password)) {
-            try(Statement statement = connection.createStatement()) {
-                try(ResultSet resultSet =
+        try (Connection connection = DriverManager.getConnection(databaseUrl, username, password)) {
+            try (Statement statement = connection.createStatement()) {
+                try (ResultSet resultSet =
                     statement.executeQuery("SELECT count(*) FROM pg_database "
-                                         + "WHERE datistemplate = false AND datname = '" + databaseName + "'")) {
+                                               + "WHERE datistemplate = false AND datname = '" + databaseName + "'")) {
                     if (resultSet.next()) {
                         int result = resultSet.getInt(1);
                         if (result < 1) {
                             log.info("Database \'{}\' does not exist! Creating...", databaseName);
                             statement.executeUpdate("CREATE DATABASE " + databaseName);
                             log.info("Database \'{}\' successfully created", databaseName);
-                        }
-                        else {
+                        } else {
                             log.info("Database \'{}\' already exists", databaseName);
                         }
                     }
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error("Failed to create database \'{}\': {}", databaseName, e.getMessage());
         }
     }

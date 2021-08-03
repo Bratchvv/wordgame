@@ -3,11 +3,9 @@ package com.wordgame.admin.controller.portal;
 import com.wordgame.admin.model.FilterBuilder;
 import com.wordgame.admin.model.StoreFilterForm;
 import com.wordgame.management.entity.GameCategories;
-import com.wordgame.management.entity.GameWords;
 import com.wordgame.management.repository.GameCategoriesRepository;
-import com.wordgame.management.repository.GameWordsRepository;
 import com.wordgame.management.service.GameCategoriesService;
-import com.wordgame.management.service.GameWordsService;
+import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,10 +20,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
-import java.security.Principal;
 
 /**
- * Основной контроллер для страниц.
+ * Контроллер для бекапов категорий
+ *
+ * @author vbratchikov
  */
 @Controller
 @RequiredArgsConstructor
@@ -35,17 +34,18 @@ public class BackupCategoryController {
     private final GameCategoriesService gameCategoriesService;
     private final FilterBuilder<StoreFilterForm, GameCategories> gameCategoriesFilterBuilder;
 
-    @RequestMapping(value = { "/management/backup-categories" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/management/backup-categories"}, method = RequestMethod.GET)
     public String backup(Model model, Principal principal,
                          @SortDefault(sort = "date", direction = Sort.Direction.DESC) Pageable pageable,
                          @ModelAttribute(value = "filterForm") StoreFilterForm storeFilterForm) {
-        model.addAttribute("page", gameCategoriesRepository.findAll(gameCategoriesFilterBuilder.build(storeFilterForm), pageable));
+        model.addAttribute("page", gameCategoriesRepository
+            .findAll(gameCategoriesFilterBuilder.build(storeFilterForm), pageable));
 
         return "/management/backup-categories";
     }
 
 
-    @RequestMapping(value="/management/backup-categories/activate/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/management/backup-categories/activate/{id}", method = RequestMethod.POST)
     public RedirectView activate(@PathVariable Long id,
                                  Pageable pageable,
                                  @ModelAttribute(value = "filterForm") StoreFilterForm storeFilterForm,
@@ -60,7 +60,8 @@ public class BackupCategoryController {
             redir.addFlashAttribute("globalErrorMessage", "Ошибка при активации");
         }
         redir.addFlashAttribute("filterForm", new StoreFilterForm());
-        redir.addFlashAttribute("page", gameCategoriesRepository.findAll(gameCategoriesFilterBuilder.build(new StoreFilterForm()), pageable));
+        redir.addFlashAttribute("page", gameCategoriesRepository
+            .findAll(gameCategoriesFilterBuilder.build(new StoreFilterForm()), pageable));
         return redirectView;
     }
 }

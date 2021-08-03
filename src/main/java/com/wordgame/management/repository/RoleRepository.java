@@ -1,4 +1,5 @@
 package com.wordgame.management.repository;
+
 import com.wordgame.management.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

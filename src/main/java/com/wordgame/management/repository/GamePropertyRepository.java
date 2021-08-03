@@ -1,16 +1,15 @@
 package com.wordgame.management.repository;
 
+import static org.hibernate.annotations.QueryHints.CACHEABLE;
+
 import com.wordgame.management.entity.GameProperty;
+import java.util.List;
+import java.util.Optional;
+import javax.persistence.QueryHint;
 import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.QueryHint;
-import java.util.List;
-import java.util.Optional;
-
-import static org.hibernate.annotations.QueryHints.CACHEABLE;
 
 @Repository
 @Transactional

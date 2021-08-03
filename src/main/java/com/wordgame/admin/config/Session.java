@@ -1,10 +1,9 @@
 package com.wordgame.admin.config;
 
+import java.io.Serializable;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
-
-import java.io.Serializable;
 
 
 /**
