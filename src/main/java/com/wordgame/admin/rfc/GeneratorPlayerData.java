@@ -45,18 +45,25 @@ public class GeneratorPlayerData {
     public void afterInit() {
         if (count>0) {
             log.info("Run rfc test for player generation ");
-            EditableRatingTableDto ratingTable = ratingTablesService.createRatingTable("test_table", null);
+            EditableRatingTableDto ratingTable = ratingTablesService.createRatingTable(
+                    "test_table_"+((long)(Math.random()*1000)), null);
+            EditableRatingTableDto ratingTable2 = ratingTablesService.createRatingTable(
+                    "test_table_"+((long)(Math.random()*1000)), null);
+            EditableRatingTableDto ratingTable3 = ratingTablesService.createRatingTable(
+                    "test_table_"+((long)(Math.random()*1000)), null);
             List<PlayerDto> players = new ArrayList<>();
             for (int i = 0; i < count; i++) {
                 players.add(playerService.createPlayer(PlayerDto.builder()
                         .id(UUID.randomUUID().toString())
-                        .name("player_" + i)
-                        .urlAvatar("http://player_logo_" + i)
+                        .name("player_" + i +"_" + System.currentTimeMillis())
+                        .urlAvatar("http://player_logo_" + i + System.currentTimeMillis())
                         .build()));
             }
             for (int i = 0; i < players.size(); i++) {
                 PlayerDto p = players.get(i);
                 ratingTablesService.insertDataToTable(ratingTable.getName(), p.getId(), i*10);
+                ratingTablesService.insertDataToTable(ratingTable2.getName(), p.getId(), i*10);
+                ratingTablesService.insertDataToTable(ratingTable3.getName(), p.getId(), i*10);
             }
         }
     }

@@ -8,7 +8,7 @@
 <div layout:fragment="content" class="container">
 
   <div class="filter-pane">
-    <form th:action="@{/statistics/rating-details}" th:object="${filterForm}" method="get">
+    <form th:action="@{'/statistics/rating-details/{id}'(id=${pageId})}" th:object="${filterForm}" method="get">
       <h5 class="filter-pane__title">Фильтр</h5>
       <div class="filter-items">
         <input placeholder="ID игрока" id="id-search" type="text" th:field="*{playerId}"

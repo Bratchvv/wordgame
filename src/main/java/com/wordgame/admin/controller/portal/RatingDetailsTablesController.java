@@ -65,7 +65,7 @@ public class RatingDetailsTablesController {
         } catch (Exception e) {
             redir.addFlashAttribute("globalErrorMessage", "Ошибка при очитске. " + e.getMessage());
         }
-        redir.addFlashAttribute("filterForm", new StoreFilterForm());
+        redir.addFlashAttribute("filterForm", new RatingTableDataFilterForm());
         model.addAttribute("page", ratingTableDataRepository
             .findAll(ratingTablesDataFilterBuilder.build(storeFilterForm), pageable));
         return redirectView;

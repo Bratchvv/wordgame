@@ -56,13 +56,13 @@ public class HttpInterceptor implements HandlerInterceptor {
 
         String selectedPage;
         if (isNull(request.getCookies())) {
-            selectedPage = "/management/rating";
+            selectedPage = "/statistics/rating";
         } else {
             selectedPage = Arrays.stream(request.getCookies())
                 .filter(c -> "selectedPage".equals(c.getName()))
                 .map(Cookie::getValue)
                 .findFirst()
-                .orElse("/management/rating");
+                .orElse("/statistics/rating");
         }
         Cookie cookie = new Cookie("selectedPage", selectedPage.toString());
         cookie.setPath("/");

@@ -59,7 +59,7 @@ public class RatingTablesController {
         if (bindingResult.hasErrors()) {
             redir.addFlashAttribute("globalErrorMessage", "Ошибка при очитске");
         }
-        redir.addFlashAttribute("filterForm", new StoreFilterForm());
+        redir.addFlashAttribute("filterForm", new RatingTableFilterForm());
         model.addAttribute("page", ratingTableRepository.findAll(ratingTablesFilterBuilder
                                                                      .build(new RatingTableFilterForm()), pageable));
         return redirectView;
@@ -79,7 +79,7 @@ public class RatingTablesController {
         if (bindingResult.hasErrors()) {
             redir.addFlashAttribute("globalErrorMessage", "Ошибка при очитске");
         }
-        redir.addFlashAttribute("filterForm", new StoreFilterForm());
+        redir.addFlashAttribute("filterForm", new RatingTableFilterForm());
         model.addAttribute("page", ratingTableRepository.findAll(ratingTablesFilterBuilder
                                                                      .build(new RatingTableFilterForm()), pageable));
         return redirectView;
