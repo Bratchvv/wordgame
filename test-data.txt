@@ -1,0 +1,532 @@
+CRUD ПО PLAYER
+
+POST /api/v1/player
+
+// 1
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a159",
+  "name": "Vendor777",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-ce84480d61b3db9a8e1522a99875832f_screen.jpg?ts=1615794516"
+}
+
+// 2
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a111",
+  "name": "Vendor777",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-ce84480d61b3db9a8e1522a99875832f_screen.jpg?ts=1615794516"
+}
+
+// 3
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a122",
+  "name": "Vendor777",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-ce84480d61b3db9a8e1522a99875832f_screen.jpg?ts=1615794516"
+}
+
+// 4
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a133",
+  "name": "Vendor777",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-ce84480d61b3db9a8e1522a99875832f_screen.jpg?ts=1615794516"
+}
+
+// 5
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a144",
+  "name": "Vendor777",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-ce84480d61b3db9a8e1522a99875832f_screen.jpg?ts=1615794516"
+}
+
+
+
+PUT /api/v1/player
+
+// 1
+
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a159",
+  "name": "Dart222",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-Dart222",
+  "health": {
+    "lifes": 5,
+    "secondsRestoreLife": 1234
+  }
+}
+
+// 2
+
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a111",
+  "name": "God222",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-God222",
+  "health": {
+    "lifes": 51,
+    "secondsRestoreLife": 123456
+  }
+}
+
+// 3
+
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a122",
+  "name": "MD222",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-MD222",
+  "health": {
+    "lifes": 1,
+    "secondsRestoreLife": 34567
+  }
+}
+
+// 4
+
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a133",
+  "name": "Rew222",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-Rew222",
+  "health": {
+    "lifes": 8,
+    "secondsRestoreLife": 7893
+  }
+}
+
+// 5
+
+{
+  "id": "26a8d90b-e47d-4f16-bd7c-b98de4c2a144",
+  "name": "Vewa222",
+  "urlAvatar": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/testing-logo-design-template-Vewa222",
+  "health": {
+    "lifes": 56,
+    "secondsRestoreLife": 193
+  }
+}
+
+
+
+GET /api/v1/player
+
+// 1
+26a8d90b-e47d-4f16-bd7c-b98de4c2a159
+
+// 2
+26a8d90b-e47d-4f16-bd7c-b98de4c2a111
+
+// 3
+26a8d90b-e47d-4f16-bd7c-b98de4c2a122
+
+// 4
+26a8d90b-e47d-4f16-bd7c-b98de4c2a133
+
+// 5
+26a8d90b-e47d-4f16-bd7c-b98de4c2a144
+
+
+==============================================================================
+
+ДАННЫЕ ПРОГРЕССА 
+
+
+POST 
+/api/v1/player/categories/26a8d90b-e47d-4f16-bd7c-b98de4c2a159
+
+26a8d90b-e47d-4f16-bd7c-b98de4c2a111
+26a8d90b-e47d-4f16-bd7c-b98de4c2a122
+
+{
+    "items": [
+        {
+            "nameCategory": "name1",
+            "levels": [
+                {
+                    "cards": [
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ],
+                            "letters": ["ф","б","в"]
+                        },
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ],
+                            "letters": ["ф","б","в"]
+                        }
+                    ]
+                },
+                {
+                    "cards": [
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ],
+                            "letters": ["ф","б","в"]
+                        },
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ],
+                            "letters": ["ф","б","в"]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "nameCategory": "name1",
+            "urlImage": "www",
+            "levels": [
+                {
+                    "cards": [
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ],
+                            "letters": ["ф","б","в"]
+                        },
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ],
+                            "letters": ["ф","б","в"]
+                        }
+                    ]
+                },
+                {
+                    "cards": [
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ]
+                        },
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ],
+                            "letters": ["ф","б","в"]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+ПОЛУЧЕНИЕ
+
+GET http://localhost:8051/api/v1/player/categories/26a8d90b-e47d-4f16-bd7c-b98de4c2a159
+
+GET http://localhost:8051/api/v1/player/categories/26a8d90b-e47d-4f16-bd7c-b98de4c2a122
+
+==============================================================================
+
+GENERATOR
+
+http://localhost:8051/api/v1/generator
+
+
+
+==============================================================================
+
+КАТЕГОРИИ
+
+
+POST  /api​/v1​/categories
+
+{
+    "items": [
+        {
+            "nameCategory": "name1",
+            "urlImage": "www",
+            "levels": [
+                {
+                    "cards": [
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ]
+                        },
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "cards": [
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ]
+                        },
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "nameCategory": "name1",
+            "urlImage": "www",
+            "levels": [
+                {
+                    "cards": [
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ]
+                        },
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "cards": [
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ]
+                        },
+                        {
+                            "nameCard": "name1",
+                            "countWords": 2,
+                            "words": [
+                                "words1",
+                                "words2"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+
+
+GET http://localhost:8051/api/v1/categories/1
+
+
+Проверка актуальности своей версии категорий
+
+http://localhost:8051/api/v1/categories/check-version?id=2
+где 2 - это ID json-a категорий, который хранится локально.
+
+Если Ответ 
+{
+  "isActual": false
+}
+
+то получаем активные
+
+http://localhost:8051/api/v1/categories/active
+
+
+
+==============================================================================
+
+СТАТИСТИКА
+
+POST /api/v1/rating/table
+
+// 1
+{
+  "name": "Самый быстрый результат",
+  "expireHoursCycle": 1
+}
+
+// 2
+{
+  "name": "Самое большое слово",
+  "expireHoursCycle": 1
+}
+
+// 3
+{
+  "name": "Количество игр"
+}
+
+
+
+
+POST  /api/v1/rating/player
+
+// Самый быстрый результат
+// 1
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a159",
+  "name": "Самый быстрый результат",
+  "value": 100
+}
+
+// 2
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a111",
+  "name": "Самый быстрый результат",
+  "value": 1000
+}
+
+// 3
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a122",
+  "name": "Самый быстрый результат",
+  "value": 10000
+}
+
+// 4
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a133",
+  "name": "Самый быстрый результат",
+  "value": 20000
+}
+
+// 5
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a144",
+  "name": "Самый быстрый результат",
+  "value": 500
+}
+
+
+// Самое большое слово
+// 1
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a159",
+  "name": "Самое большое слово",
+  "value": 300
+}
+
+// 2
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a111",
+  "name": "Самое большое слово",
+  "value": 3000
+}
+
+
+// 3
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a122",
+  "name": "Самое большое слово",
+  "value": 30000
+}
+
+
+// 4
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a133",
+  "name": "Самое большое слово",
+  "value": 40000
+}
+
+
+
+// 5
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a144",
+  "name": "Самое большое слово",
+  "value": 300
+}
+
+
+// Количество игр
+// 1
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a159",
+  "name": "Количество игр",
+  "value": 5
+}
+
+// 2
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a111",
+  "name": "Количество игр",
+  "value": 30
+}
+
+
+// 3
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a122",
+  "name": "Количество игр",
+  "value": 30
+}
+
+
+// 4
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a133",
+  "name": "Количество игр",
+  "value": 40
+}
+
+
+// 5
+{
+  "playerId": "26a8d90b-e47d-4f16-bd7c-b98de4c2a144",
+  "name": "Количество игр",
+  "value": 3
+}
+
+
+
+// Получение с сортировкой
+http://localhost:8051/api/v1/rating/table/%D0%9A%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE%20%D0%B8%D0%B3%D1%80?page=0&size=0&sort=value,desc
+
+
+
+// TOP
+
+GET  /api/v1/rating/top/26a8d90b-e47d-4f16-bd7c-b98de4c2a159/Количество игр
+
+http://localhost:8051/api/v1/rating/top/26a8d90b-e47d-4f16-bd7c-b98de4c2a159/%D0%9A%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE%20%D0%B8%D0%B3%D1%80?upperSize=2&topSize=2&lowerSize=2

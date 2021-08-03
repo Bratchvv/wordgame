@@ -57,11 +57,11 @@ public class PlayerCategoriesController {
             content = {@Content(mediaType = "application/json",
                 schema = @Schema(implementation = ErrorDto.class))})})
     @PostMapping("/{id}")
-    public ResponseEntity<?> createPlayer(@PathVariable String id,
+    public ResponseEntity<?> createPlayerCategories(@PathVariable String id,
                                           @RequestBody PlayerGameCategoriesData inputDto) {
         try {
             playerGameCategoriesService.saveData(id, inputDto);
-            return ResponseEntity.ok("{\"id\" : " + id + "}");
+            return ResponseEntity.ok("{\"id\" : \"" + id + "\"}");
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(ErrorDto.builder()
