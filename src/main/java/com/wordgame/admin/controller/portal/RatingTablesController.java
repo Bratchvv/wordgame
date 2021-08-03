@@ -1,8 +1,9 @@
 package com.wordgame.admin.controller.portal;
 
-import com.wordgame.admin.model.FilterBuilder;
+import com.wordgame.core.FilterBuilder;
 import com.wordgame.admin.model.StoreFilterForm;
 import com.wordgame.statistics.entity.RatingTable;
+import com.wordgame.statistics.filter.RatingTableFilterForm;
 import com.wordgame.statistics.repository.RatingTableRepository;
 import com.wordgame.statistics.service.RatingTablesService;
 import java.security.Principal;
@@ -33,12 +34,12 @@ public class RatingTablesController {
 
     private final RatingTableRepository ratingTableRepository;
     private final RatingTablesService ratingTablesService;
-    private final FilterBuilder<StoreFilterForm, RatingTable> ratingTablesFilterBuilder;
+    private final FilterBuilder<RatingTableFilterForm, RatingTable> ratingTablesFilterBuilder;
 
     @RequestMapping(value = {"/statistics/rating"}, method = RequestMethod.GET)
     public String rating(Model model, Principal principal,
                          @SortDefault(sort = "name", direction = Sort.Direction.DESC) Pageable pageable,
-                         @ModelAttribute(value = "filterForm") StoreFilterForm storeFilterForm) {
+                         @ModelAttribute(value = "filterForm") RatingTableFilterForm storeFilterForm) {
         model.addAttribute("page",
                            ratingTableRepository.findAll(ratingTablesFilterBuilder.build(storeFilterForm), pageable));
         return "/statistics/rating";
@@ -60,7 +61,7 @@ public class RatingTablesController {
         }
         redir.addFlashAttribute("filterForm", new StoreFilterForm());
         model.addAttribute("page", ratingTableRepository.findAll(ratingTablesFilterBuilder
-                                                                     .build(new StoreFilterForm()), pageable));
+                                                                     .build(new RatingTableFilterForm()), pageable));
         return redirectView;
     }
 
@@ -80,7 +81,7 @@ public class RatingTablesController {
         }
         redir.addFlashAttribute("filterForm", new StoreFilterForm());
         model.addAttribute("page", ratingTableRepository.findAll(ratingTablesFilterBuilder
-                                                                     .build(new StoreFilterForm()), pageable));
+                                                                     .build(new RatingTableFilterForm()), pageable));
         return redirectView;
     }
 }

@@ -26,14 +26,12 @@ import org.springframework.stereotype.Service;
 public class GeneratorRfcWithBuffer {
 
     private final InMemWordsBufferService inMemWordsBufferService;
-    @Value("${rfc.buffered.generator}")
-    private boolean rfcEnabled;
     @Value("${rfc.buffered.count}")
     private int count;
 
     @PostConstruct
     public void afterInit() {
-        if (rfcEnabled) {
+        if (count>0) {
             log.info("Run rfc test for buffered generation");
             AtomicLong timeSum = new AtomicLong(0);
             AtomicLong countSum = new AtomicLong(0);

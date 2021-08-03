@@ -1,7 +1,9 @@
-package com.wordgame.admin.model;
+package com.wordgame.management.filter;
 
 import static java.util.Objects.nonNull;
 
+import com.wordgame.core.FilterBuilder;
+import com.wordgame.admin.model.StoreFilterForm;
 import com.wordgame.management.entity.GameCategories;
 import com.wordgame.management.entity.GameCategories_;
 import java.util.ArrayList;

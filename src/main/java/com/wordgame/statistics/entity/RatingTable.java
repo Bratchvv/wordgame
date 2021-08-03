@@ -48,4 +48,11 @@ public class RatingTable {
             orphanRemoval = true)
     @ToString.Exclude
     private Collection<RatingTableData> ratingTableData;
+
+    public Long calcRestoreTime() {
+        if(expireHoursCycle == null) {
+            return null;
+        }
+        return (expireHoursCycle*60*60) - ((System.currentTimeMillis() - initTimeUtc)/1000);
+    }
 }

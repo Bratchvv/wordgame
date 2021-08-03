@@ -1,8 +1,10 @@
-package com.wordgame.admin.model;
+package com.wordgame.management.filter;
 
 import static java.util.Objects.nonNull;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+import com.wordgame.core.FilterBuilder;
+import com.wordgame.admin.model.StoreFilterForm;
 import com.wordgame.management.entity.GameWords;
 import com.wordgame.management.entity.GameWords_;
 import java.util.ArrayList;

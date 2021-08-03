@@ -1,5 +1,6 @@
 package com.wordgame.statistics.service;
 
+import com.wordgame.core.FilterBuilder;
 import com.wordgame.gameplay.repository.PlayerRepository;
 import com.wordgame.statistics.dto.EditableRatingTableDataDto;
 import com.wordgame.statistics.dto.EditableRatingTableDto;
@@ -12,12 +13,14 @@ import com.wordgame.statistics.dto.RatingTopDto.Range;
 import com.wordgame.statistics.dto.RatingTopDto.Res;
 import com.wordgame.statistics.entity.RatingTable;
 import com.wordgame.statistics.entity.RatingTableData;
+import com.wordgame.statistics.filter.RatingTableDataFilterForm;
 import com.wordgame.statistics.repository.RatingDataListRepository;
 import com.wordgame.statistics.repository.RatingTableDataRepository;
 import com.wordgame.statistics.repository.RatingTableListRepository;
 import com.wordgame.statistics.repository.RatingTableRepository;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -101,13 +104,101 @@ public class RatingTablesService {
 
     public RatingTopDto getPlayerRatingsData(String id, String name, Integer upperSize,
                                              Integer topSize, Integer lowerSize) {
+        var table = ratingTableRepository.findFirstByName(name);
+        var top = ratingTableDataRepository.ratingTop(name, topSize);
+        var current = ratingTableDataRepository.ratingTopPlayer(name, id);
+        var upper = ratingTableDataRepository.ratingTopUpper(name, current.getI(), (current.getI() - upperSize));
+        var lower = ratingTableDataRepository.ratingTopLower(name, current.getI(), (current.getI() + lowerSize));
+        List<Res> resList = new ArrayList<>();
+        List<Range> rangeList = new ArrayList<>();
+
+        long index = 0;
+
+        Range topRangeRes = null;
+        if(current.getI() > 1) {
+            //TOP
+            var topRange = Range.builder().start(index);
+            long topSz = 0;
+            for (RatingTableDataRepository.IndexedRatingDto item : top) {
+                if (!resList.isEmpty() && resList.stream().anyMatch(r -> r.getId().equals(item.getPlayer()))) {
+                    continue;
+                }
+                resList.add(buildRes(item));
+                index++;
+                topSz++;
+            }
+            if (topSz > 0) {
+                topRange.size(topSz);
+                topRangeRes = topRange.build();
+                rangeList.add(topRangeRes);
+            }
+        }
+
+        //UPPER
+        long upperSz = 0;
+        var upperRange = Range.builder().start(index);
+        for (RatingTableDataRepository.IndexedRatingDto item : upper) {
+            if(!resList.isEmpty() && resList.stream().anyMatch(r -> r.getId().equals(item.getPlayer()))) {
+                continue;
+            }
+            resList.add(buildRes(item));
+            index++;
+            upperSz++;
+        }
+        if(upperSz > 0) {
+            upperRange.size(upperSz);
+            rangeList.add(upperRange.build());
+        }
+
+        //CURRENT
+        if(resList.stream().noneMatch(r -> r.getId().equals(current.getPlayer()))) {
+            var currentRange = Range.builder().start(index);
+            resList.add(buildRes(current));
+            index++;
+            currentRange.size(1l);
+            rangeList.add(currentRange.build());
+        } else if(topRangeRes != null) {
+            topRangeRes.setSize(topRangeRes.getSize()-1);
+            var currentRange = Range.builder().start(--index);
+            currentRange.size(1l);
+            rangeList.add(currentRange.build());
+        }
+
+        //LOWER
+        long lowerSz = 0;
+        var lowerRange = Range.builder().start(index);
+        for (RatingTableDataRepository.IndexedRatingDto item : lower) {
+            if(!resList.isEmpty() && resList.stream().anyMatch(r -> r.getId().equals(item.getPlayer()))) {
+                continue;
+            }
+            resList.add(buildRes(item));
+            index++;
+            lowerSz++;
+        }
+        if(lowerSz > 0) {
+            lowerRange.size(lowerSz);
+            rangeList.add(lowerRange.build());
+        }
+
+
         return RatingTopDto.builder()
-            .name(name)
-            .res(List.of(Res.builder().id(id).place(1).name("qedw").urlAvatar("aefwe").value(123).build()))
-            .range(List.of(Range.builder().start(0).size(2).build()))
+            .name(table.getName()).timeRestore(table.calcRestoreTime())
+            .res(resList)
+            .range(rangeList)
             .build();
     }
 
+    private Res buildRes(RatingTableDataRepository.IndexedRatingDto item) {
+        var p = playerRepository.findById(item.getPlayer()).orElseThrow(EntityNotFoundException::new);
+        return Res.builder()
+                .id(p.getId())
+                .place(item.getI())
+                .name(p.getName())
+                .urlAvatar(p.getUrlAvatar())
+                .value(item.getValue())
+                .build();
+
+    }
     public void clearRatings() {
         ratingTableRepository.findAll().forEach(ratingTable -> {
             var cycle = ratingTable.getExpireHoursCycle();

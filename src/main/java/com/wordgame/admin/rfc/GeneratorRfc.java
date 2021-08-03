@@ -26,14 +26,12 @@ import org.springframework.stereotype.Service;
 public class GeneratorRfc {
 
     private final GeneratorService generatorService;
-    @Value("${rfc.raw.generator}")
-    private boolean rfcEnabled;
     @Value("${rfc.raw.count}")
     private int count;
 
     @PostConstruct
     public void afterInit() {
-        if (rfcEnabled) {
+        if (count>0) {
             log.info("Run rfc test for raw generation ");
             AtomicLong timeSum = new AtomicLong(0);
             AtomicLong countSum = new AtomicLong(0);

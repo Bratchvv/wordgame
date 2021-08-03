@@ -76,12 +76,9 @@ spring:
 dictionary:
   source: opt/dictionary/words.txt
 rfc:
-  raw:
-    generator: false
-    count: 1000
-  buffered:
-    generator: false
-    count: 1000
+  raw.count: 0
+  buffered.count: 0
+  player.count: 0
 ---
 spring:
   config:
@@ -106,12 +103,9 @@ spring:
 dictionary:
   source: opt/dictionary/words.txt
 rfc:
-  raw:
-    generator: false
-    count: 0
-  buffered:
-    generator: false
-    count: 0
+  raw.count: 0
+  buffered.count: 0
+  player.count: 0
 
 ---
 spring:
@@ -137,9 +131,6 @@ spring:
 dictionary:
   source: /opt/dictionary/words.txt
 rfc:
-  raw:
-    generator: false
-    count: 0
-  buffered:
-    generator: false
-    count: 0
+  raw.count: 0
+  buffered.count: 0
+  player.count: 0

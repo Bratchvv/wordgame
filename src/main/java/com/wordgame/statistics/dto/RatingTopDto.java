@@ -12,6 +12,7 @@ import lombok.Data;
 public class RatingTopDto {
 
     private String name;
+    private Long timeRestore;
     private List<Res> res;
     private List<Range> range;
 
@@ -19,8 +20,8 @@ public class RatingTopDto {
     @Builder
     public static class Res {
         private String id;
-        private Integer value;
-        private Integer place;
+        private Long value;
+        private Long place;
         private String name;
         private String urlAvatar;
     }
@@ -28,7 +29,7 @@ public class RatingTopDto {
     @Data
     @Builder
     public static class Range {
-        private Integer start;
-        private Integer size;
+        private Long start;
+        private Long size;
     }
 }

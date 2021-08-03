@@ -1,4 +1,4 @@
-package com.wordgame.admin.model;
+package com.wordgame.core;
 
 import static java.util.Objects.isNull;
 import static org.springframework.util.CollectionUtils.isEmpty;

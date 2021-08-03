@@ -1,6 +1,6 @@
 package com.wordgame.admin.controller.portal;
 
-import com.wordgame.admin.model.FilterBuilder;
+import com.wordgame.core.FilterBuilder;
 import com.wordgame.admin.model.StoreFilterForm;
 import com.wordgame.management.entity.GameCategories;
 import com.wordgame.management.repository.GameCategoriesRepository;

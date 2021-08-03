@@ -1,8 +1,9 @@
 package com.wordgame.admin.controller.portal;
 
-import com.wordgame.admin.model.FilterBuilder;
+import com.wordgame.core.FilterBuilder;
 import com.wordgame.admin.model.StoreFilterForm;
 import com.wordgame.statistics.entity.RatingTableData;
+import com.wordgame.statistics.filter.RatingTableDataFilterForm;
 import com.wordgame.statistics.repository.RatingTableDataRepository;
 import com.wordgame.statistics.repository.RatingTableRepository;
 import com.wordgame.statistics.service.RatingTablesService;
@@ -36,12 +37,12 @@ public class RatingDetailsTablesController {
     private final RatingTableDataRepository ratingTableDataRepository;
     private final RatingTableRepository ratingTableRepository;
     private final RatingTablesService ratingTablesService;
-    private final FilterBuilder<StoreFilterForm, RatingTableData> ratingTablesDataFilterBuilder;
+    private final FilterBuilder<RatingTableDataFilterForm, RatingTableData> ratingTablesDataFilterBuilder;
 
     @RequestMapping(value = {"/statistics/rating-details/{id}"}, method = RequestMethod.GET)
     public String rating(@PathVariable Long id, Model model, Principal principal,
                          @SortDefault(sort = "value", direction = Sort.Direction.DESC) Pageable pageable,
-                         @ModelAttribute(value = "filterForm") StoreFilterForm storeFilterForm) {
+                         @ModelAttribute(value = "filterForm") RatingTableDataFilterForm storeFilterForm) {
         String name = ratingTableRepository.findById(id).orElseThrow(EntityExistsException::new).getName();
         model.addAttribute("pageId", id);
         model.addAttribute("tableName", name);
@@ -56,7 +57,7 @@ public class RatingDetailsTablesController {
                                      @RequestParam(name = "name") String name,
                                      @RequestParam(name = "value") Integer value,
                                      Pageable pageable,
-                                     @ModelAttribute(value = "filterForm") StoreFilterForm storeFilterForm,
+                                     @ModelAttribute(value = "filterForm") RatingTableDataFilterForm storeFilterForm,
                                      BindingResult bindingResult, Model model, RedirectAttributes redir) {
         RedirectView redirectView = new RedirectView("/statistics/rating-details/" + pageId, true);
         try {

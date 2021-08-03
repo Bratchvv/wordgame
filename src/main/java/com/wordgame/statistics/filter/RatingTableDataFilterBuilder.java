@@ -1,7 +1,8 @@
-package com.wordgame.admin.model;
+package com.wordgame.statistics.filter;
 
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
+import com.wordgame.core.FilterBuilder;
 import com.wordgame.gameplay.entity.Player_;
 import com.wordgame.statistics.entity.RatingTableData;
 import com.wordgame.statistics.entity.RatingTableData_;
@@ -17,10 +18,10 @@ import org.springframework.stereotype.Component;
  * @author Vladimir Bratchikov
  */
 @Component
-public class RatingTableDataFilterFilterBuilder extends FilterBuilder<StoreFilterForm, RatingTableData> {
+public class RatingTableDataFilterBuilder extends FilterBuilder<RatingTableDataFilterForm, RatingTableData> {
 
     @Override
-    protected List<Predicate> buildInternal(StoreFilterForm filters, Root<RatingTableData> root, CriteriaQuery<?> query,
+    protected List<Predicate> buildInternal(RatingTableDataFilterForm filters, Root<RatingTableData> root, CriteriaQuery<?> query,
                                             CriteriaBuilder criteriaBuilder) {
 
         final List<Predicate> predicates = new ArrayList<>();
