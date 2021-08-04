@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Сохранение и получение прогресса в карточках
+ *
+ * @author vbratchikov
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/v1/player/categories", produces = MediaType.APPLICATION_JSON_VALUE)

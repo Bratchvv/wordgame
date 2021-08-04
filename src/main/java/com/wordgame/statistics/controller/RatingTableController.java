@@ -1,6 +1,12 @@
 package com.wordgame.statistics.controller;
 
-import com.wordgame.statistics.dto.*;
+import com.wordgame.statistics.dto.CreateRatingTableParamsDto;
+import com.wordgame.statistics.dto.EditableRatingTableDto;
+import com.wordgame.statistics.dto.ErrorDto;
+import com.wordgame.statistics.dto.InputPlayerRatingParamsDto;
+import com.wordgame.statistics.dto.RatingPlayerListDataDto;
+import com.wordgame.statistics.dto.RatingTableDto;
+import com.wordgame.statistics.dto.RatingTopDto;
 import com.wordgame.statistics.service.RatingTablesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,6 +27,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Рейтинг\лидерборды
+ *
+ * @author vbratchikov
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/v1/rating", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -85,6 +96,13 @@ public class RatingTableController {
         }
     }
 
+    /**
+     * Получение очков
+     *
+     * @param id
+     * @param name
+     * @return
+     */
     @Operation(summary = "Get player rating from specific table")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "User rating",
@@ -108,6 +126,12 @@ public class RatingTableController {
         }
     }
 
+    /**
+     * Помещение очков в таблицу
+     *
+     * @param inputDto
+     * @return
+     */
     @Operation(summary = "Save player data to rating table")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "User rating stored to table",
@@ -128,6 +152,37 @@ public class RatingTableController {
                     .details(e.getMessage())
                     .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Создание таблицы через запрос
+     *
+     * @param inputDto
+     * @return
+     */
+    @Operation(summary = "Create new rating table")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Created new rating table, "
+            + "or inform about existing rating table",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = EditableRatingTableDto.class))}),
+        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
+            content = {@Content(mediaType = "application/json",
+                schema = @Schema(implementation = ErrorDto.class))})})
+    @PostMapping("/table")
+    public ResponseEntity<?> createRatingTable(@RequestBody CreateRatingTableParamsDto inputDto) {
+        try {
+            return ResponseEntity.ok(
+                ratingTablesService.createRatingTable(inputDto.getName(), inputDto.getExpireHoursCycle())
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(ErrorDto.builder()
+                                            .name(e.getClass().getName())
+                                            .details(e.getMessage())
+                                            .build(),
+                                        HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -175,28 +230,4 @@ public class RatingTableController {
         }
     }
 
-    @Operation(summary = "Create new rating table")
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Created new rating table, "
-            + "or inform about existing rating table",
-            content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = EditableRatingTableDto.class))}),
-        @ApiResponse(responseCode = "500", description = "Server error, see server logs",
-            content = {@Content(mediaType = "application/json",
-                schema = @Schema(implementation = ErrorDto.class))})})
-    @PostMapping("/table")
-    public ResponseEntity<?> createRatingTable(@RequestBody CreateRatingTableParamsDto inputDto) {
-        try {
-            return ResponseEntity.ok(
-                ratingTablesService.createRatingTable(inputDto.getName(), inputDto.getExpireHoursCycle())
-            );
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(ErrorDto.builder()
-                    .name(e.getClass().getName())
-                    .details(e.getMessage())
-                    .build(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }

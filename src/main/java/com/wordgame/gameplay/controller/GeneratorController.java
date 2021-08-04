@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * Запросы к генератору
+ *
  * @author Vladimir Bratchikov
  */
 @RequiredArgsConstructor

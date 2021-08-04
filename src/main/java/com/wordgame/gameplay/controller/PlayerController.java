@@ -22,6 +22,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Данные об игроке
+ *
+ * @author vbratchikov
+ */
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api/v1/player", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,6 +34,12 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
+    /**
+     * Запрос на получение жизней
+     *
+     * @param id
+     * @return
+     */
     @Operation(summary = "Get player data")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Get player data",
@@ -52,6 +63,12 @@ public class PlayerController {
     }
 
 
+    /**
+     * Создание игрока на сервере
+     *
+     * @param inputDto
+     * @return
+     */
     @Operation(summary = "Store new player")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "New player stored",
@@ -74,6 +91,12 @@ public class PlayerController {
         }
     }
 
+    /**
+     * Запрос на сохранение
+     *
+     * @param inputDto
+     * @return
+     */
     @Operation(summary = "Update player data")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Player data updated",
