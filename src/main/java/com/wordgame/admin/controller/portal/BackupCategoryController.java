@@ -1,7 +1,7 @@
 package com.wordgame.admin.controller.portal;
 
-import com.wordgame.core.FilterBuilder;
 import com.wordgame.admin.model.StoreFilterForm;
+import com.wordgame.core.FilterBuilder;
 import com.wordgame.management.entity.GameCategories;
 import com.wordgame.management.repository.GameCategoriesRepository;
 import com.wordgame.management.service.GameCategoriesService;
@@ -50,7 +50,7 @@ public class BackupCategoryController {
                                  Pageable pageable,
                                  @ModelAttribute(value = "filterForm") StoreFilterForm storeFilterForm,
                                  BindingResult bindingResult, Model model, RedirectAttributes redir) {
-        RedirectView redirectView = new RedirectView("/management/backup-words", true);
+        RedirectView redirectView = new RedirectView("/management/backup-categories", true);
         try {
             gameCategoriesService.activate(id);
         } catch (Exception e) {
