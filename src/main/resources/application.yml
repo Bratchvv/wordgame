@@ -1,5 +1,5 @@
 server:
-  port: 8051
+  port: 8080
   compression:
     enabled: true
     min-response-size: 1KB
@@ -73,8 +73,6 @@ spring:
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 10
-dictionary:
-  source: opt/dictionary/words.txt
 rfc:
   raw.count: 0
   buffered.count: 0
@@ -100,8 +98,6 @@ spring:
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 10
-dictionary:
-  source: opt/dictionary/words.txt
 rfc:
   raw.count: 0
   buffered.count: 0
@@ -128,8 +124,6 @@ spring:
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 100
-dictionary:
-  source: /opt/dictionary/words.txt
 rfc:
   raw.count: 0
   buffered.count: 0

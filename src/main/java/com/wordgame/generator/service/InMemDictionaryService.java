@@ -3,19 +3,14 @@ package com.wordgame.generator.service;
 import com.wordgame.generator.algorithm.ReadFileWord;
 import com.wordgame.management.entity.GameWords;
 import com.wordgame.management.repository.GameWordsRepository;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +26,6 @@ public class InMemDictionaryService {
 
     private final List<String> inMemWordDictionary = new ArrayList<>();
     private final GameWordsRepository gameWordsRepository;
-
-    @Value("${dictionary.source}")
-    private String dictionaryFilePath;
 
     private ReadFileWord inMemReadFileWord = null;
 
@@ -62,19 +54,6 @@ public class InMemDictionaryService {
         inMemWordDictionary.clear();
         inMemWordDictionary.addAll(words);
         inMemReadFileWord = new ReadFileWord(words);
-    }
-
-    public void fullUpdateFromFile() {
-        List<String> words = new LinkedList<>();
-        try (Stream<String> lines = Files.lines(
-            Paths.get(dictionaryFilePath), Charset.defaultCharset())) {
-            lines.forEachOrdered(words::add);
-        } catch (Exception e) {
-
-            e.printStackTrace();
-            return;
-        }
-        fullUpdate(words);
     }
 
     public void fullUpdateFromEntity(GameWords gameWords) {

@@ -11,7 +11,10 @@ public class RatingScheduledConfig {
 
     private final RatingTablesService ratingTablesService;
 
-    @Scheduled(fixedDelay = 1000*60*60, initialDelay = 1000*60)
+    /**
+     * Раз в 5 мин, сканируем таблицы для возможной очистки
+     */
+    @Scheduled(fixedDelay = 1000*60*5, initialDelay = 1000*60)
     public void clearRatingScheduler() {
         ratingTablesService.clearRatings();
     }

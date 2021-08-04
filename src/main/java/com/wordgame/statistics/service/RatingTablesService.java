@@ -1,6 +1,5 @@
 package com.wordgame.statistics.service;
 
-import com.wordgame.core.FilterBuilder;
 import com.wordgame.gameplay.repository.PlayerRepository;
 import com.wordgame.statistics.dto.EditableRatingTableDataDto;
 import com.wordgame.statistics.dto.EditableRatingTableDto;
@@ -13,7 +12,6 @@ import com.wordgame.statistics.dto.RatingTopDto.Range;
 import com.wordgame.statistics.dto.RatingTopDto.Res;
 import com.wordgame.statistics.entity.RatingTable;
 import com.wordgame.statistics.entity.RatingTableData;
-import com.wordgame.statistics.filter.RatingTableDataFilterForm;
 import com.wordgame.statistics.repository.RatingDataListRepository;
 import com.wordgame.statistics.repository.RatingTableDataRepository;
 import com.wordgame.statistics.repository.RatingTableListRepository;
@@ -199,13 +197,13 @@ public class RatingTablesService {
                 .build();
 
     }
+    @Transactional
     public void clearRatings() {
         ratingTableRepository.findAll().forEach(ratingTable -> {
-            var cycle = ratingTable.getExpireHoursCycle();
-            var startTime = ratingTable.getInitTimeUtc();
-            var millis = OffsetDateTime.now(ZoneOffset.UTC).toInstant().toEpochMilli();
-            if (millis >= (startTime + cycle * 60 * 60 * 1000)) {
+            if (ratingTable.calcRestoreTime() != null && ratingTable.calcRestoreTime() < 0) {
                 clearRating(ratingTable.getId());
+                ratingTable.setInitTimeUtc(OffsetDateTime.now(ZoneOffset.UTC).toInstant().toEpochMilli());
+                ratingTableRepository.save(ratingTable);
             }
         });
     }

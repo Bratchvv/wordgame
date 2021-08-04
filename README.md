@@ -1,5 +1,17 @@
 ЗАПУСК
 
+Штатный запуск.
+
+"C:\Program Files\Java\jdk-16.0.2\bin\java" -jar wordgame-1.0.0-SNAPSHOT.jar --server.port=8051 --spring.datasource.url=jdbc:postgresql://localhost:5432/wordgamedb --spring.datasource.username=postgres --spring.datasource.password=postgres
+
+Запуск с нагрузочным тестом.
+
+"C:\Program Files\Java\jdk-16.0.2\bin\java" -jar wordgame-1.0.0-SNAPSHOT.jar --server.port=8051 --spring.datasource.url=jdbc:postgresql://localhost:5432/wordgamedb --spring.datasource.username=postgres --spring.datasource.password=postgres --rfc.buffered.count=5000
+
+Запуск с генератором игроков.
+
+"C:\Program Files\Java\jdk-16.0.2\bin\java" -jar wordgame-1.0.0-SNAPSHOT.jar --server.port=8051 --spring.datasource.url=jdbc:postgresql://localhost:5432/wordgamedb --spring.datasource.username=postgres --spring.datasource.password=postgres --rfc.player.count=5000
+
 
 ССЫЛКИ
 
@@ -18,7 +30,4 @@ password: postgres
 username: admin
 password: admin
 
-
-
-ТЕСТОВЫЕ ЗАПРОСЫ
 
