@@ -1,5 +1,6 @@
 package com.wordgame.gameplay.service;
 
+import com.wordgame.gameplay.dto.AdvancedInputPlayerDto;
 import com.wordgame.gameplay.dto.AdvancedPlayerDto;
 import com.wordgame.gameplay.dto.PlayerDto;
 import com.wordgame.gameplay.entity.Health;
@@ -28,7 +29,7 @@ public class PlayerService {
         return gameplayModelMapper.map(player, PlayerDto.class);
     }
 
-    public AdvancedPlayerDto savePlayerData(AdvancedPlayerDto inputDto) {
+    public AdvancedPlayerDto savePlayerData(AdvancedInputPlayerDto inputDto) {
         Player player = playerRepository.findById(inputDto.getId()).orElseThrow(EntityNotFoundException::new);
         Player playerRequest = gameplayModelMapper.map(inputDto, Player.class);
         player.setName(playerRequest.getName());

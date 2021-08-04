@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HealthDto extends HealthInputDto {
+public class HealthInputDto {
 
-    private Long timeUTCSaving;
-    private Long timeUTCNow;
+    private Integer lifes;
+    private Long secondsRestoreLife;
 }

@@ -1,5 +1,6 @@
 package com.wordgame.gameplay.controller;
 
+import com.wordgame.gameplay.dto.AdvancedInputPlayerDto;
 import com.wordgame.gameplay.dto.AdvancedPlayerDto;
 import com.wordgame.gameplay.dto.ErrorDto;
 import com.wordgame.gameplay.dto.PlayerDto;
@@ -27,7 +28,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlayerController {
 
     private final PlayerService playerService;
-
 
     @Operation(summary = "Get player data")
     @ApiResponses(value = {
@@ -74,7 +74,6 @@ public class PlayerController {
         }
     }
 
-
     @Operation(summary = "Update player data")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Player data updated",
@@ -84,7 +83,7 @@ public class PlayerController {
             content = {@Content(mediaType = "application/json",
                 schema = @Schema(implementation = ErrorDto.class))})})
     @PutMapping
-    public ResponseEntity<?> savePlayerData(@RequestBody AdvancedPlayerDto inputDto) {
+    public ResponseEntity<?> savePlayerData(@RequestBody AdvancedInputPlayerDto inputDto) {
         try {
             return ResponseEntity.ok(playerService.savePlayerData(inputDto));
         } catch (Exception e) {
