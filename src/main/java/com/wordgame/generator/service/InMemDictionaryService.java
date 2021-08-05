@@ -5,6 +5,7 @@ import com.wordgame.management.entity.GameWords;
 import com.wordgame.management.repository.GameWordsRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -58,7 +59,7 @@ public class InMemDictionaryService {
 
     public void fullUpdateFromEntity(GameWords gameWords) {
         List<String> words = new LinkedList<>(Arrays.asList(
-            gameWords.getData().replaceAll("\r", "").split("\n")));
+            new String(Base64.getDecoder().decode((gameWords.getData().getBytes()))).split(",")));
         fullUpdate(words);
     }
 }

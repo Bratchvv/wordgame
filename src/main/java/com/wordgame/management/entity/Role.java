@@ -20,7 +20,7 @@ import org.hibernate.Hibernate;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "role", schema = "management")
+@Table(name = "role")
 public class Role {
 
     @Id

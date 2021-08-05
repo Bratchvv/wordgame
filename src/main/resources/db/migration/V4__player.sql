@@ -1,20 +1,20 @@
-
-CREATE TABLE gameplay.health
+CREATE TABLE IF NOT EXISTS health
 (
-    id serial NOT NULL,
-    lifes integer,
+    id                   INT AUTO_INCREMENT PRIMARY KEY,
+    lifes                INT,
     seconds_restore_life bigint,
-    timeutcsaving bigint,
-    timeutcnow bigint,
-    CONSTRAINT uk_player_health_id UNIQUE (id)
+    timeutcsaving        bigint,
+    timeutcnow           bigint
 );
 
-CREATE TABLE gameplay.player
+CREATE TABLE IF NOT EXISTS player
 (
-    id text primary key NOT NULL,
-    name text NOT NULL,
-    url_avatar text NOT NULL,
-    health_id bigint NOT NULL references gameplay.health (id),
-    CONSTRAINT uk_player_id UNIQUE (id)
+    id         VARCHAR(255) primary key NOT NULL,
+    name       VARCHAR(255)             NOT NULL,
+    url_avatar text                     NOT NULL,
+    health_id  INT                      NOT NULL,
+    FOREIGN KEY (health_id)
+        REFERENCES health (id)
+        ON UPDATE RESTRICT ON DELETE CASCADE
 );
 

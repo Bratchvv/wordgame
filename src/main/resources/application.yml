@@ -8,6 +8,7 @@ server:
 
 spring.servlet.multipart.maxFileSize: 10MB
 spring.servlet.multipart.maxRequestSize: 10MB
+spring.flyway.baselineOnMigrate: true
 
 spring.main.allow-bean-definition-overriding: true
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation: true
@@ -65,11 +66,11 @@ spring:
         ddl-auto: validate
   #Данные подключения к БД
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/wordgamedb
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/wordgamedb
     type: com.zaxxer.hikari.HikariDataSource
-    username: postgres
-    password: postgres
+    username: wordgamedbuser
+    password: password
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 10
@@ -88,6 +89,10 @@ spring:
     jpa:
       hibernate:
         ddl-auto: validate
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
   #Данные подключения к БД
   datasource:
     driver-class-name: org.h2.Driver
@@ -116,11 +121,11 @@ spring:
         ddl-auto: validate
   #Данные подключения к БД
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/wordgame
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/wordgamedb
     type: com.zaxxer.hikari.HikariDataSource
-    username: postgres
-    password: postgres
+    username: wordgamedbuser
+    password: password
     hikari:
       connection-timeout: 30000
       maximum-pool-size: 100

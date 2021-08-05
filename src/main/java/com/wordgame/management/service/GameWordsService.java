@@ -5,12 +5,14 @@ import com.wordgame.management.dto.GameWordsDto;
 import com.wordgame.management.dto.GameWordsInfoDto;
 import com.wordgame.management.entity.GameWords;
 import com.wordgame.management.repository.GameWordsRepository;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -54,7 +56,11 @@ public class GameWordsService {
         dto.setActive(true);
         dto.setDate(LocalDateTime.now());
         dto.setName(name);
-        dto.setData(data);
+        dto.setData(new String(
+            Base64.encodeBase64(String.join(", ", data
+                .replaceAll("\r", "")
+                .split("\n")).getBytes(StandardCharsets.UTF_8)))
+        );
         GameWords words = gameWordsRepository.save(modelMapper.map(dto, GameWords.class));
         inMemDictionaryService.fullUpdateFromEntity(words);
     }

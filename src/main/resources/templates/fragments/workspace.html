@@ -113,8 +113,8 @@
             <select id="menu-select" class="pretty-select"
                     onchange="setCookie('selectedPage', this.value); window.location.href=this.value; return false;">
                 <option th:each="page : ${pagesList}"
-                        th:selected="${page.path}==${#httpServletRequest.requestURI}"
-                        th:disabled="${page.path}==${#httpServletRequest.requestURI}"
+                        th:selected="${#strings.contains(#httpServletRequest.requestURI, page.path)}"
+                        th:disabled="${#strings.contains(#httpServletRequest.requestURI, page.path)}"
                         th:value="${page.path}"
                         th:utext="${page.name}"/>
             </select>
