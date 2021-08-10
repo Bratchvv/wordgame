@@ -44,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable(); // отключаем CORS (если https - нужно включить)
-        http.authorizeRequests().antMatchers("/api/v1/**", "/login", "/logout").permitAll();
+        http.authorizeRequests().antMatchers("/api/v1/**", "/login", "/logout", "/swagger-ui/**", "/api-docs").permitAll();
         http.authorizeRequests().antMatchers("/", "/management/**").access("hasRole('ROLE_ADMIN')");
         http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
 
